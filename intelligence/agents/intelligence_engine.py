@@ -649,33 +649,35 @@ def ask_ultron(DB_PATH, query, user_login="Admin", api_key="", use_sequential_th
             "type": "text"
         }
 
-    # 1.5 ANÁLISIS DINÁMICO (Google Gemini)
-    # Si no llega api_key, intentar recuperar de la configuración global o local
-    if not api_key or str(api_key).strip() == "":
-        brain_cfg_tenant = obtener_config(DB_PATH, "ULLTRONE_BRAIN_CONFIG", {})
-        api_key = brain_cfg_tenant.get("api_key", "")
-        
-        # --- CRÍTICO: FALLBACK A DB GLOBAL ---
-        if not api_key:
-            from config.config import DB_PATH_GLOBAL
-            brain_cfg_global = obtener_config(DB_PATH_GLOBAL, "ULLTRONE_BRAIN_CONFIG", {})
-            api_key = brain_cfg_global.get("api_key", "")
+    # 1.5 ANÁLISIS DINÁMICO (Multi-Provider AI Engine)
+    # Recuperar configuración de cerebro
+    brain_cfg = obtener_config(DB_PATH, "ULLTRONE_BRAIN_CONFIG", {})
 
+    # Fallback a DB global si no hay configuración en tenant
+    if not brain_cfg or not brain_cfg.get("api_key"):
+        from config.config import DB_PATH_GLOBAL
+        brain_cfg = obtener_config(DB_PATH_GLOBAL, "ULLTRONE_BRAIN_CONFIG", {})
+
+    # Si se pasó api_key como parámetro, sobrescribir
     if api_key and str(api_key).strip() != "":
+        brain_cfg["api_key"] = api_key
+
+    # Validar configuración mínima
+    if brain_cfg and brain_cfg.get("api_key") and str(brain_cfg.get("api_key")).strip() != "":
         try:
-            import google.generativeai as genai
-            # ── RECUPERAR CONFIGURACIÓN DE MODELO ──
-            brain_cfg = obtener_config(DB_PATH, "ULLTRONE_BRAIN_CONFIG", {"model_name": "gemini-1.5-flash"})
-            model_target = brain_cfg.get("model_name", "gemini-1.5-flash")
-            
-            genai.configure(api_key=api_key.strip())
-            model = genai.GenerativeModel(model_target)
+            from intelligence.ai_engine import AIEngineFactory
+
+            # Usar la factory para crear el motor de IA con la configuración
+            ai_engine = AIEngineFactory.create_from_db_config(brain_cfg)
 
             # ── INYECCIÓN RAG (Biblioteca Neuronal) ──
             contexto_memoria = obtener_contexto_neuronal(DB_PATH, query)
 
+            # Obtener nombre del proveedor para logs
+            provider_name = brain_cfg.get("api_provider", "Google Gemini")
+
             prompt_maestro = f"""
-Eres Ull-Trone, el núcleo de inteligencia definitiva de CGT.pro. 
+Eres Ull-Trone, el núcleo de inteligencia definitiva de CGT.pro.
 Tu misión es actuar como Socio Estratégico AI de Nivel 5, Auditor Experto y Consultor de Desarrollo.
 
 CONSTITUCIÓN Y LEYES DEL SISTEMA:
@@ -692,21 +694,24 @@ Si la información no está en el contexto, admítelo. Nunca inventes datos.
 
 CONSULTA DEL ESTRATEGA: {query}
             """
-            resp = model.generate_content(prompt_maestro)
+
+            # Generar respuesta usando el proveedor configurado
+            resp = ai_engine.generate(prompt_maestro)
 
             return {
                 "role": "assistant",
-                "content": resp.text,
-                "type": "text"
+                "content": resp,
+                "type": "text",
+                "provider": provider_name
             }
         except Exception as e:
-            import logging
-            logging.error(f"Ull-Trone AI Error: {str(e)}")
-            # Retornar error descriptivo instead of fallback
+            logger.error(f"Ull-Trone AI Error con {brain_cfg.get('api_provider', 'desconocido')}: {str(e)}")
+            provider_name = brain_cfg.get("api_provider", "desconocido")
             return {
                 "role": "assistant",
-                "content": f"🚨 **Error de Conexión Neuronal**\n\nNo he podido establecer el enlace con Gemini. \n- **Detalle**: `{str(e)}` \n- **Sugerencia**: Verifica que la librería `google-generativeai` esté instalada y que tu API Key sea válida en el panel de Cerebro.",
-                "type": "error"
+                "content": f"🚨 **Error de Conexión Neuronal**\n\nNo he podido establecer el enlace con **{provider_name}**.\n\n- **Error**: `{str(e)}`\n- **Sugerencia**: Verifica que tu API Key sea válida en el panel de Configuración del Cerebro (⚙️).\n- **Proveedor**: {provider_name}\n- **Modelo**: {brain_cfg.get('model_name', 'no especificado')}",
+                "type": "error",
+                "provider": provider_name
             }
 
 
