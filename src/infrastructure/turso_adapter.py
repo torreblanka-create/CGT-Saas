@@ -227,6 +227,8 @@ class TursoConnection:
     def __init__(self, db_path, env="local"):
         self.db_path = db_path
         self.env = env or os.getenv("TURSO_ENV", "local")
+        # Asegurar que el directorio existe antes de conectar
+        ensure_db_dir(db_path)
         self._conn = sqlite3.connect(db_path, timeout=30)
         self._conn.row_factory = sqlite3.Row
         if self.env == "local":
