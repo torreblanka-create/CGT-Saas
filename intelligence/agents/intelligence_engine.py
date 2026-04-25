@@ -744,7 +744,10 @@ CONSULTA DEL ESTRATEGA: {query}
                 if api_key and str(api_key).strip() != "":
                     try:
                         import fitz
-                        import google.generativeai as genai
+                        try:
+                            import google.genai as genai
+                        except ImportError:
+                            import google.generativeai as genai
                         # ── RECUPERAR CONFIGURACIÓN DE MODELO ──
                         brain_cfg = obtener_config(DB_PATH, "ULLTRONE_BRAIN_CONFIG", {"model_name": "gemini-1.5-flash"})
                         model_target = brain_cfg.get("model_name", "gemini-1.5-flash")

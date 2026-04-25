@@ -1,16 +1,25 @@
 import json
 import os
+import logging
 
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 try:
     import fitz  # PyMuPDF
 except ImportError:
     fitz = None
+
+# Intenta usar nueva librería, fallback a antigua
+genai = None
 try:
-    import google.generativeai as genai
+    import google.genai as genai
 except ImportError:
-    genai = None
+    try:
+        import google.generativeai as genai
+    except ImportError:
+        genai = None
 
 def extract_text_from_pdf(file_obj):
     """Extrae texto de un objeto de archivo PDF."""

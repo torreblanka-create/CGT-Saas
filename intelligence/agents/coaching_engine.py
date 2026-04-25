@@ -380,7 +380,10 @@ def generar_coaching_personalizado(DB_PATH: str, empresa_id: int = 0, contrato_i
     respuesta_ia = None
     if api_key and str(api_key).strip():
         try:
-            import google.generativeai as genai
+            try:
+                import google.genai as genai
+            except ImportError:
+                import google.generativeai as genai
             genai.configure(api_key=api_key.strip())
             model = genai.GenerativeModel('gemini-1.5-flash')
 
