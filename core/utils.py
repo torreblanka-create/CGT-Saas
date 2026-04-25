@@ -21,6 +21,55 @@ import streamlit as st
 
 logger = logging.getLogger(__name__)
 
+def normalizar_nombre(nombre: str) -> str:
+    """
+    Normaliza un nombre: primero letra mayúscula, resto minúsculas.
+    Maneja None, strings vacíos y acentos.
+    
+    Args:
+        nombre: Nombre a normalizar
+    
+    Returns:
+        Nombre normalizado con formato título
+    """
+    if not nombre:
+        return ""
+    import unicodedata
+    # Eliminar acentos pero mantener ñ
+    nombre_normalizado = ""
+    for c in nombre.strip():
+        if c in 'ñÑ':
+            nombre_normalizado += c
+        else:
+            descompuesto = unicodedata.normalize('NFD', c)
+            nombre_normalizado += ''.join(ch for ch in descompuesto if unicodedata.category(ch) != 'Mn')
+    # Title case (primera letra mayúscula)
+    return nombre_normalizado.title()
+
+
+def normalizar_rut(rut: str) -> str:
+    """
+    Normaliza un RUT chileno: elimina puntos, guiones, espacios.
+    Convierte K mayúscula.
+    
+    Args:
+        rut: RUT a normalizar (ej: " 12.345.678 - 9 ")
+    
+    Returns:
+        RUT normalizado (ej: "12345678-9")
+    """
+    if not rut:
+        return ""
+    # Eliminar espacios, puntos y guiones
+    rut = rut.strip().replace(".", "").replace("-", "").replace(" ", "")
+    if not rut:
+        return ""
+    # El último carácter es el dígito verificador
+    digitos = rut[:-1]
+    dv = rut[-1].upper()
+    return f"{digitos}-{dv}"
+
+
 def get_scoping_params(filtros: Dict) -> Tuple[bool, int, str]:
     """
     Centraliza la lógica de alcance (Global Admin vs Admin Local).

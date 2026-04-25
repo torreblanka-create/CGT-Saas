@@ -281,6 +281,26 @@ class FatalityRisksEngine:
 
 _engine = None
 
+
+def cargar_riesgos() -> Dict:
+    """
+    Carga todos los riesgos fatales desde los módulos RF01-RF30.
+    Útil para tests y para acceso directo a la data de riesgos.
+    
+    Returns:
+        Dict con todos los riesgos fatales disponibles
+    """
+    from core.fatality_risks_rf01_rf10 import FATALITY_RISKS_RF01_RF10
+    from core.fatality_risks_rf11_rf20 import FATALITY_RISKS_RF11_RF20
+    from core.fatality_risks_rf21_rf30 import FATALITY_RISKS_RF21_RF30
+    
+    riesgos = {}
+    riesgos.update(FATALITY_RISKS_RF01_RF10)
+    riesgos.update(FATALITY_RISKS_RF11_RF20)
+    riesgos.update(FATALITY_RISKS_RF21_RF30)
+    return riesgos
+
+
 def obtener_fatality_engine(db_path: str = None) -> FatalityRisksEngine:
     """Obtiene instancia singleton del motor de riesgos fatales unificado"""
     global _engine
