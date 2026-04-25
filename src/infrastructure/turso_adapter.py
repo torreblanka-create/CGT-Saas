@@ -303,11 +303,14 @@ def get_turso_connection(db_path, turso_url=None, turso_token=None):
         pass
 
     # Pull al inicio de la sesión (trae datos frescos de Turso)
+    # SOLO si está en sync mode Y tiene credenciales
     if env == "sync":
-        try:
-            turso_pull(db_path)
-        except Exception as e:
-            logger.warning(f"Pull inicial fallido (continuando en local): {e}")
+        url, token = _get_turso_credentials()
+        if url and token:
+            try:
+                turso_pull(db_path)
+            except Exception as e:
+                logger.warning(f"Pull inicial fallido (continuando en local): {e}")
 
     conn = TursoConnection(db_path, env)
     try:
