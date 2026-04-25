@@ -74,10 +74,15 @@ def turso_pull(local_db_path: str):
     """
     Descarga todas las tablas de Turso Cloud → SQLite local.
     Sobreescribe solo tablas que existen en Turso.
+    Solo activo si TURSO_ENV=sync Y hay credenciales.
     """
     url, token = _turso_credentials()
     if not url or not token:
         return
+
+    env = os.getenv("TURSO_ENV", "local")
+    if env != "sync":
+        return  # No hacer nada si no estamos en sync mode
 
     # Asegurar que el directorio existe antes de intentar abrir la BD
     ensure_db_dir(local_db_path)
@@ -143,10 +148,15 @@ def turso_pull(local_db_path: str):
 def turso_push(local_db_path: str):
     """
     Sube todas las tablas de SQLite local → Turso Cloud.
+    Solo activo si TURSO_ENV=sync Y hay credenciales.
     """
     url, token = _turso_credentials()
     if not url or not token:
         return
+
+    env = os.getenv("TURSO_ENV", "local")
+    if env != "sync":
+        return  # No hacer nada si no estamos en sync mode
 
     # Asegurar que el directorio existe antes de intentar abrir la BD
     ensure_db_dir(local_db_path)
@@ -268,11 +278,14 @@ class TursoConnection:
 
     def commit(self):
         self._conn.commit()
+        # Solo hacer push si está explícitamente en sync mode Y tiene credenciales
         if self.env == "sync":
-            try:
-                turso_push(self.db_path)
-            except Exception as e:
-                logger.warning(f"Push fallido (datos guardados local): {e}")
+            url, token = _get_turso_credentials()
+            if url and token:
+                try:
+                    turso_push(self.db_path)
+                except Exception as e:
+                    logger.warning(f"Push fallido (datos guardados local): {e}")
 
     def close(self):
         try:
