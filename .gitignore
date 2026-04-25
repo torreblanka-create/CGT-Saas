@@ -4,6 +4,7 @@
 *.db-wal
 *.sqlite
 *.sqlite3
+!data/seed_cgt_control.db
 
 # ── Datos y Backups (pueden contener información sensible) ───────────
 CGT_DATA/

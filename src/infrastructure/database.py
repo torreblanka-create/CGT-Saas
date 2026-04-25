@@ -115,6 +115,17 @@ def inicializar_base_datos(db_path):
         # En cloud, asegurar que el directorio local existe (para cache)
         ensure_db_dir(db_path)
 
+    # SEED: Si no existe la BD en este entorno, copiar la BD semilla con datos precargados
+    if not os.path.exists(db_path):
+        seed_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "seed_cgt_control.db")
+        if os.path.exists(seed_path):
+            try:
+                import shutil
+                shutil.copy2(seed_path, db_path)
+                print(f"BD semilla copiada desde {seed_path} a {db_path}")
+            except Exception as e:
+                print(f"Error copiando BD semilla: {e}")
+
     # RESPALDO PREVENTIVO (Constitución de Ultron - Ley 4.1)
     try: respaldar_base_datos(db_path)
     except Exception as e: print(f"⚠️ Error en respaldo preventivo: {e}")
@@ -494,19 +505,27 @@ def cargar_usuarios(db_path):
             effective_pw = plain_pw if plain_pw else "cgt_init_2026"
             pw_hashed = generar_hash(effective_pw)
 
-            # Verificar si el usuario ya existe
-            cursor.execute("SELECT username FROM usuarios WHERE username = ?", (username,))
-            exists = cursor.fetchone()
+            try:
+                # Verificar si el usuario ya existe
+                cursor.execute("SELECT username FROM usuarios WHERE username = ?", (username,))
+                exists = cursor.fetchone()
 
-            if not exists:
-                cursor.execute("""
-                    INSERT INTO usuarios (username, pw, rol, nombre, empresa_id, contrato_asignado_id, email, cargo, departamento, terminos_aceptados)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
-                """, (username, pw_hashed, rol, nombre, emp_id, cont_id, email, cargo, depto))
-            else:
-                # Actualizar siempre la contraseña para garantizar acceso con credenciales actuales
-                cursor.execute("UPDATE usuarios SET pw = ?, rol = ? WHERE username = ?",
-                               (pw_hashed, rol, username))
+                if not exists:
+                    # Si el email ya está usado por otro, usar uno único
+                    cursor.execute("SELECT username FROM usuarios WHERE email = ?", (email,))
+                    if cursor.fetchone():
+                        email = f"{username}_{int(time.time())}@cgt.pro" if False else f"{username}@cgt.local"
+                    cursor.execute("""
+                        INSERT INTO usuarios (username, pw, rol, nombre, empresa_id, contrato_asignado_id, email, cargo, departamento, terminos_aceptados)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+                    """, (username, pw_hashed, rol, nombre, emp_id, cont_id, email, cargo, depto))
+                else:
+                    # Actualizar siempre la contraseña para garantizar acceso con credenciales actuales
+                    cursor.execute("UPDATE usuarios SET pw = ?, rol = ? WHERE username = ?",
+                                   (pw_hashed, rol, username))
+            except Exception as e:
+                print(f"[USR] Error con {username}: {e}")
+                continue
 
         conn.commit()
 

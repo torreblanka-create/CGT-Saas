@@ -37,6 +37,22 @@ else:
 DB_PATH_GLOBAL = os.path.join(BASE_DATA_DIR, "cgt_control.db") # Catálogo Maestro (Usuarios Globales)
 DB_PATH = DB_PATH_GLOBAL # Por defecto
 
+# SEED INICIAL: Copiar BD semilla con datos precargados si la BD no existe
+# Esto debe ejecutarse ANTES de cualquier conexión a la BD
+def _seed_database():
+    if not os.path.exists(DB_PATH):
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        seed_path = os.path.join(BASE_PROJECT_DIR, "data", "seed_cgt_control.db")
+        if os.path.exists(seed_path):
+            try:
+                import shutil
+                shutil.copy2(seed_path, DB_PATH)
+                print(f"[SEED] BD semilla cargada: {DB_PATH}")
+            except Exception as e:
+                print(f"[SEED] Error: {e}")
+
+_seed_database()
+
 EXCEL_MAESTRO_PATH = os.path.join(BASE_DATA_DIR, "CGT_Master_Database.xlsx")
 
 # Carpetas Estáticas
