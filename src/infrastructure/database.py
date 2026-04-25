@@ -1,5 +1,4 @@
 import os
-import shutil
 import sqlite3
 import unicodedata
 from contextlib import contextmanager
@@ -8,6 +7,8 @@ from datetime import datetime
 import bcrypt
 import pandas as pd
 from dotenv import load_dotenv
+
+from src.infrastructure.turso_adapter import get_turso_connection, ensure_db_dir
 
 # Cargar variables de entorno — .env local tiene prioridad; en Streamlit Cloud se usan st.secrets
 load_dotenv()
@@ -37,10 +38,15 @@ def normalizar_texto(texto):
 # Configuración Global
 TIMEOUT_DB = 30
 def respaldar_base_datos(db_path, max_backups=10):
-    """Crea una copia de seguridad con marca de tiempo en la carpeta BACKUPS."""
+    """Crea copia de seguridad local (deshabilitado en cloud; Turso maneja backups)."""
+    env = os.getenv("TURSO_ENV", "local")
+    if env != "local":
+        return  # Turso Cloud maneja los backups automáticamente
+
     try:
         if not os.path.exists(db_path): return
 
+        import shutil
         base_dir = os.path.dirname(db_path)
         backup_dir = os.path.join(base_dir, "BACKUPS")
         os.makedirs(backup_dir, exist_ok=True)
@@ -61,18 +67,39 @@ def respaldar_base_datos(db_path, max_backups=10):
 
 @contextmanager
 def get_db_connection(db_path):
-    """Gestor de contexto para conexiones SQLite con WAL habilitado."""
-    conn = sqlite3.connect(db_path, timeout=TIMEOUT_DB)
-    try:
-        conn.execute("PRAGMA journal_mode=WAL")
+    """Gestor de contexto para conexiones Turso/SQLite con WAL habilitado (local) o no (cloud)."""
+    with get_turso_connection(db_path) as conn:
+        env = os.getenv("TURSO_ENV", "local")
+        # WAL solo en modo local; Turso maneja concurrencia internamente
+        if env == "local":
+            try:
+                conn.execute("PRAGMA journal_mode=WAL")
+            except Exception:
+                pass  # Si falla, seguir (Turso no soporta PRAGMA)
         yield conn
-    finally:
-        conn.close()
 
 def obtener_conexion(db_path):
-    """Retorna una conexión SQLite directa (sin context manager)."""
-    conn = sqlite3.connect(db_path, timeout=TIMEOUT_DB)
-    conn.execute("PRAGMA journal_mode=WAL")
+    """Retorna una conexión Turso/SQLite directa (sin context manager)."""
+    from src.infrastructure.turso_adapter import TursoConnection
+    env = os.getenv("TURSO_ENV", "local")
+    turso_url = os.getenv("LIBSQL_DB_URL")
+    turso_token = os.getenv("LIBSQL_DB_AUTH_TOKEN")
+
+    # Fallback a st.secrets si disponible
+    if not turso_url:
+        try:
+            import streamlit as st
+            turso_url = st.secrets.get("LIBSQL_DB_URL")
+            turso_token = st.secrets.get("LIBSQL_DB_AUTH_TOKEN")
+        except Exception:
+            pass
+
+    conn = TursoConnection(db_path, turso_url, turso_token, env)
+    if env == "local":
+        try:
+            conn.execute("PRAGMA journal_mode=WAL")
+        except Exception:
+            pass
     return conn
 
 def ejecutar_query(db_path, query, params=(), commit=False):
@@ -95,9 +122,15 @@ def generar_hash(password):
 
 def inicializar_base_datos(db_path):
     """Crea y actualiza la estructura completa de las tablas de CGT."""
-    db_dir = os.path.dirname(db_path)
-    if db_dir:
-        os.makedirs(db_dir, exist_ok=True)
+    env = os.getenv("TURSO_ENV", "local")
+    # Solo crear directorio en modo local
+    if env == "local":
+        db_dir = os.path.dirname(db_path)
+        if db_dir:
+            os.makedirs(db_dir, exist_ok=True)
+    else:
+        # En cloud, asegurar que el directorio local existe (para cache)
+        ensure_db_dir(db_path)
 
     # RESPALDO PREVENTIVO (Constitución de Ultron - Ley 4.1)
     try: respaldar_base_datos(db_path)
@@ -348,17 +381,17 @@ def inicializar_base_datos(db_path):
                 if col == "contrato_id" and table in ["especificaciones_equipos", "usuarios"]:
                     continue
                 try: cursor.execute(f"ALTER TABLE {table} ADD COLUMN {col} INTEGER DEFAULT 0")
-                except sqlite3.OperationalError: pass
+                except (sqlite3.OperationalError, Exception): pass
 
         # Parches específicos para Incidentes
         for col_inc in ["reportante", "afectado"]:
             try: cursor.execute(f"ALTER TABLE reportes_incidentes ADD COLUMN {col_inc} TEXT")
-            except sqlite3.OperationalError: pass
+            except (sqlite3.OperationalError, Exception): pass
 
         # Parches específicos para SGI (Trazabilidad y Gestión v2.0)
         for col_sgi, tipo_sgi in {"path": "TEXT", "ambito": "TEXT", "sub_area": "TEXT", "sigla_negocio": "TEXT", "correlativo": "TEXT", "empresa": "TEXT", "estado_doc": "TEXT"}.items():
             try: cursor.execute(f"ALTER TABLE procedimientos ADD COLUMN {col_sgi} {tipo_sgi}")
-            except sqlite3.OperationalError: pass
+            except (sqlite3.OperationalError, Exception): pass
 
         # Parches específicos para tabla usuarios (por si ya existe)
         columnas_usuarios = {
@@ -376,19 +409,19 @@ def inicializar_base_datos(db_path):
         for col, tip in columnas_usuarios.items():
             try:
                 cursor.execute(f"SELECT {col} FROM usuarios LIMIT 1")
-            except sqlite3.OperationalError:
+            except (sqlite3.OperationalError, Exception):
                 try: cursor.execute(f"ALTER TABLE usuarios ADD COLUMN {col} {tip}")
-                except sqlite3.OperationalError: pass
+                except (sqlite3.OperationalError, Exception): pass
 
         # Crear índice único para email si no existe
         try: cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_usuarios_email ON usuarios(email)")
-        except sqlite3.OperationalError: pass
+        except (sqlite3.OperationalError, Exception): pass
 
         # Saneamiento Proactivo SGI (ON CONFLICT Fix)
         try:
             cursor.execute("DELETE FROM procedimientos WHERE rowid NOT IN (SELECT MIN(rowid) FROM procedimientos GROUP BY codigo, empresa_id)")
             cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_procedimientos_codigo ON procedimientos(codigo)")
-        except sqlite3.OperationalError: pass
+        except (sqlite3.OperationalError, Exception): pass
 
         columnas_proc = {
             "fecha_creacion": "DATE",
@@ -401,17 +434,17 @@ def inicializar_base_datos(db_path):
         for col, tip in columnas_proc.items():
             try:
                 cursor.execute(f"SELECT {col} FROM procedimientos LIMIT 1")
-            except sqlite3.OperationalError:
+            except (sqlite3.OperationalError, Exception):
                 try: cursor.execute(f"ALTER TABLE procedimientos ADD COLUMN {col} {tip}")
-                except sqlite3.OperationalError: pass
+                except (sqlite3.OperationalError, Exception): pass
 
         for col in ["template_id", "datos_json"]:
             try: cursor.execute(f"ALTER TABLE historial_informes_calidad ADD COLUMN {col} TEXT")
-            except sqlite3.OperationalError: pass
+            except (sqlite3.OperationalError, Exception): pass
 
         # Parche Riesgos Críticos v4.7
         cols_rf = {
-            "tipo_cc": "TEXT", 
+            "tipo_cc": "TEXT",
             "periodicidad": "TEXT",
             "resp1_nom": "TEXT",
             "resp1_email": "TEXT",
@@ -420,11 +453,11 @@ def inicializar_base_datos(db_path):
         }
         for col_rf, tip_rf in cols_rf.items():
             try: cursor.execute(f"ALTER TABLE riesgos_criticos_cumplimiento ADD COLUMN {col_rf} {tip_rf}")
-            except sqlite3.OperationalError: pass
+            except (sqlite3.OperationalError, Exception): pass
 
         try:
             cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_asistencia_unica ON asistencia_capacitacion(capacitacion_id, trabajador_id)")
-        except sqlite3.OperationalError: pass
+        except (sqlite3.OperationalError, Exception): pass
 
         conn.commit()
 

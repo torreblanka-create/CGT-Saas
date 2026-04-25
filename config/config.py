@@ -1,6 +1,22 @@
 import os
 
 # ==========================================
+# 0. CONFIGURACIÓN TURSO (SQLite Distribuido)
+# ==========================================
+# TURSO_ENV controla dónde se almacenan los datos:
+# - "local": SQLite puro en disco (desarrollo)
+# - "sync": Réplica local + sincronización a Turso Cloud (producción)
+#
+# En Streamlit Cloud, exportar secretos en .streamlit/secrets.toml:
+#   TURSO_ENV = "sync"
+#   LIBSQL_DB_URL = "libsql://cgt-saas-prod-[org].turso.io"
+#   LIBSQL_DB_AUTH_TOKEN = "..."
+#
+# Localmente, crear .env:
+#   TURSO_ENV=local
+TURSO_ENV = os.getenv("TURSO_ENV", "local")
+
+# ==========================================
 # 1. RUTAS Y DIRECTORIOS DEL SISTEMA
 # ==========================================
 # Esto asegura que el sistema encuentre las carpetas sin importar desde dónde lo ejecutes.

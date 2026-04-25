@@ -35,3 +35,6 @@ gTTS>=2.5.0
 
 # ── HTTP ────────────────────────────────────────────────────────────
 requests>=2.31.0
+
+# ── Cloud Database (Turso - SQLite Distribuido) ──────────────────
+pyturso>=0.1.0
