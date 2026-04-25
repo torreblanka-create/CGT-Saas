@@ -2,17 +2,26 @@
 ==========================================
 💎 GOOGLE GEMINI PROVIDER
 ==========================================
-Adaptador para Google Gemini API
+Adaptador para Google Gemini API (nueva librería google.genai)
 """
 
 import logging
 from typing import List, Dict, Any
 
+genai = None
+GEMINI_AVAILABLE = False
+
+# Intentar import de nueva librería
 try:
-    import google.generativeai as genai
+    import google.genai as genai
     GEMINI_AVAILABLE = True
 except ImportError:
-    GEMINI_AVAILABLE = False
+    # Fallback a librería antigua (deprecada pero funciona)
+    try:
+        import google.generativeai as genai
+        GEMINI_AVAILABLE = True
+    except ImportError:
+        GEMINI_AVAILABLE = False
 
 from .base import BaseProvider, ProviderConfig
 
@@ -30,7 +39,10 @@ class GeminiProvider(BaseProvider):
     def _validate_config(self) -> None:
         """Valida configuración de Gemini"""
         if not GEMINI_AVAILABLE:
-            raise ImportError("google-generativeai no está instalado. Instálalo con: pip install google-generativeai")
+            raise ImportError(
+                "Gemini no está disponible. Instala con: "
+                "pip install google-genai (recomendado) o pip install google-generativeai"
+            )
         if not self.config.api_key:
             raise ValueError("Gemini: API KEY requerida")
         if not self.config.model_name:
@@ -39,8 +51,13 @@ class GeminiProvider(BaseProvider):
     def _initialize_client(self) -> None:
         """Inicializa cliente de Gemini"""
         try:
-            genai.configure(api_key=self.config.api_key)
-            self.client = genai.GenerativeModel(self.config.model_name)
+            if hasattr(genai, 'configure'):
+                # Librería antigua (google-generativeai)
+                genai.configure(api_key=self.config.api_key)
+                self.client = genai.GenerativeModel(self.config.model_name)
+            else:
+                # Librería nueva (google-genai)
+                self.client = genai.Client(api_key=self.config.api_key)
             logger.info(f"Gemini Provider inicializado con modelo: {self.config.model_name}")
         except Exception as e:
             logger.error(f"Error inicializando Gemini: {e}")
@@ -57,11 +74,22 @@ class GeminiProvider(BaseProvider):
             generation_config.update(self.config.extra_params)
             generation_config.update(kwargs)
 
-            response = self.client.generate_content(
-                prompt,
-                generation_config=genai.GenerationConfig(**generation_config),
-            )
-            return response.text
+            # Detectar qué librería se está usando
+            if hasattr(self.client, 'generate_content'):
+                # Librería antigua
+                response = self.client.generate_content(
+                    prompt,
+                    generation_config=genai.GenerationConfig(**generation_config),
+                )
+            else:
+                # Librería nueva
+                response = self.client.models.generate_content(
+                    model=self.config.model_name,
+                    contents=prompt,
+                    config=generation_config,
+                )
+
+            return response.text if hasattr(response, 'text') else response.content
         except Exception as e:
             logger.error(f"Error generando respuesta con Gemini: {e}")
             raise
@@ -77,15 +105,26 @@ class GeminiProvider(BaseProvider):
             generation_config.update(self.config.extra_params)
             generation_config.update(kwargs)
 
-            response = self.client.generate_content(
-                prompt,
-                generation_config=genai.GenerationConfig(**generation_config),
-                stream=True,
-            )
-
-            for chunk in response:
-                if chunk.text:
-                    yield chunk.text
+            # Librería antigua (con soporte mejorado para streaming)
+            if hasattr(self.client, 'generate_content'):
+                response = self.client.generate_content(
+                    prompt,
+                    generation_config=genai.GenerationConfig(**generation_config),
+                    stream=True,
+                )
+                for chunk in response:
+                    if hasattr(chunk, 'text') and chunk.text:
+                        yield chunk.text
+            else:
+                # Librería nueva - streaming similar
+                response = self.client.models.generate_content_stream(
+                    model=self.config.model_name,
+                    contents=prompt,
+                    config=generation_config,
+                )
+                for chunk in response:
+                    if hasattr(chunk, 'content'):
+                        yield chunk.content
         except Exception as e:
             logger.error(f"Error en streaming de Gemini: {e}")
             raise
