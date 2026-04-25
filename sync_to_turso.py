@@ -1,107 +1,145 @@
 # -*- coding: utf-8 -*-
 """
 Sincronizar datos LOCALES -> Turso Cloud
+Usa la API HTTP de Turso (sin libsql_client async).
 Ejecutar: python sync_to_turso.py
 """
 import sys
 import os
 
-sys.path.insert(0, os.path.dirname(__file__))
-os.chdir(os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(__file__) or ".")
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-# ⚠️ ATENCIÓN: Las credenciales deben estar en variables de entorno, NO hardcodeadas.
-# 
-# Antes de ejecutar, asegúrate de tener estas variables definidas:
-#   set LIBSQL_DB_URL=libsql://cgt-saas-prod-tu-org.turso.io
-#   set LIBSQL_DB_AUTH_TOKEN=eyJ...
-#
-# O crea un archivo .env con:
-#   LIBSQL_DB_URL=libsql://cgt-saas-prod-tu-org.turso.io
-#   LIBSQL_DB_AUTH_TOKEN=eyJ...
-#
-# El token actual caduca: 2026-04-24 (exp:1777180501)
-# Si caduca, genera uno nuevo en: https://console.turso.io
-
-# Cargar .env local si existe (opcional, no crítico)
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
-    pass  # python-dotenv no instalado, confiar en vars de entorno del sistema
+    pass
 
-# Si no hay variables de entorno, forzar sincronización local
-if not os.getenv("LIBSQL_DB_URL") or not os.getenv("LIBSQL_DB_AUTH_TOKEN"):
-    print("[WARN] LIBSQL_DB_URL o LIBSQL_DB_AUTH_TOKEN no están definidos.")
-    print("[WARN] Usando modo 'local' (sin sincronización Turso).")
-    os.environ['TURSO_ENV'] = 'local'
-else:
-    os.environ['TURSO_ENV'] = 'sync'
+LIBSQL_DB_URL = os.getenv("LIBSQL_DB_URL", "")
+LIBSQL_DB_AUTH_TOKEN = os.getenv("LIBSQL_DB_AUTH_TOKEN", "")
 
-from src.infrastructure.turso_adapter import get_turso_connection
+if not LIBSQL_DB_URL or not LIBSQL_DB_AUTH_TOKEN:
+    print("[WARN] LIBSQL_DB_URL o LIBSQL_DB_AUTH_TOKEN no definidos.")
+    print("[WARN] Configura .env y vuelve a ejecutar.")
+    sys.exit(1)
+
+os.environ["TURSO_ENV"] = "sync"
+
+from src.infrastructure.turso_adapter import turso_push, _turso_http_url, _turso_execute
+
 import sqlite3
 
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
-db_path = os.path.join(".", "cgt_control.db")
-print(f"[DB] Local: {db_path}")
+# BD real con todos los datos
+db_path = os.path.join(".", "CGT_DATA", "cgt_control.db")
+print(f"[DB] {db_path}")
 print(f"[DB] Existe: {os.path.exists(db_path)}")
 print(f"[DB] Tamano: {os.path.getsize(db_path) if os.path.exists(db_path) else 0} bytes")
 
-conn_local = sqlite3.connect(db_path)
-cursor = conn_local.cursor()
+if not os.path.exists(db_path):
+    print("[ERROR] No se encontro la base de datos local.")
+    sys.exit(1)
+
+conn = sqlite3.connect(db_path)
+cursor = conn.cursor()
 cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")
-tables = [row[0] for row in cursor.fetchall()]
-print(f"[TABLES] {tables}")
+tables = [r[0] for r in cursor.fetchall()]
+conn.close()
+print(f"[TABLES] {len(tables)} tablas encontradas")
 
-if not tables:
-    print("[ERROR] No hay tablas en la base local.")
-    conn_local.close()
-    exit(1)
+http_url = _turso_http_url(LIBSQL_DB_URL)
+token = LIBSQL_DB_AUTH_TOKEN
 
-print("[SYNC] Conectando a Turso Cloud (sync mode)...")
+print("\n[SYNC] Verificando conexion a Turso Cloud...")
 try:
-    with get_turso_connection(db_path) as conn:
-        print("[OK] Conectado a Turso! (pull inicial completado)")
-
-        for table in tables:
-            cursor.execute(f"SELECT sql FROM sqlite_master WHERE type='table' AND name='{table}'")
-            create_sql = cursor.fetchone()
-            if create_sql and create_sql[0]:
-                try:
-                    conn.execute(create_sql[0])
-                    print(f"[OK] Tabla '{table}' verificada/creada")
-                except Exception as e:
-                    if "already exists" in str(e):
-                        print(f"[OK] Tabla '{table}' ya existe")
-                    else:
-                        print(f"[WARN] {table}: {e}")
-
-        for table in tables:
-            cursor.execute(f"SELECT * FROM '{table}'")
-            rows = cursor.fetchall()
-            col_names = [desc[0] for desc in cursor.description]
-
-            if rows:
-                placeholders = ",".join(["?" for _ in col_names])
-                cols = ",".join(col_names)
-                conn.execute(f"DELETE FROM '{table}'")
-                for row in rows:
-                    conn.execute(f"INSERT INTO '{table}' ({cols}) VALUES ({placeholders})", row)
-                print(f"[OK] {table}: {len(rows)} registros -> Turso Cloud")
-            else:
-                print(f"[OK] {table}: sin datos")
-
-        conn.commit()
-        print()
-        print("=" * 50)
-        print("SINCRONIZACION COMPLETADA!")
-        print("=" * 50)
-        print("Tus datos locales AHORA estan en Turso Cloud.")
-        print("La app en Streamlit Cloud los vera tras el reboot.")
-
+    result = _turso_execute(http_url, token, [
+        {"type": "execute", "stmt": {"sql": "SELECT 1 as ping"}}
+    ])
+    print("[OK] Conectado a Turso Cloud!")
 except Exception as e:
-    print(f"\n[ERROR] {e}")
-    import traceback
-    traceback.print_exc()
+    print(f"[ERROR] No se pudo conectar a Turso: {e}")
+    sys.exit(1)
 
-conn_local.close()
+print("\n[SYNC] Iniciando sincronizacion...")
+
+conn = sqlite3.connect(db_path)
+conn.row_factory = sqlite3.Row
+
+synced = 0
+skipped = 0
+
+for table in tables:
+    try:
+        # 1. Crear tabla en Turso si no existe
+        schema = conn.execute(
+            f"SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (table,)
+        ).fetchone()
+        if schema and schema[0]:
+            try:
+                _turso_execute(http_url, token, [
+                    {"type": "execute", "stmt": {"sql": schema[0]}}
+                ])
+            except Exception:
+                pass  # ya existe
+
+        # 2. Leer datos locales
+        cursor = conn.execute(f'SELECT * FROM "{table}"')
+        rows = cursor.fetchall()
+        cols = [d[0] for d in cursor.description]
+
+        if not rows:
+            print(f"  [--] {table}: sin datos")
+            continue
+
+        # 3. DELETE primero
+        col_names = ", ".join(f'"{c}"' for c in cols)
+        placeholders = ", ".join(["?" for _ in cols])
+        insert_sql = f'INSERT OR REPLACE INTO "{table}" ({col_names}) VALUES ({placeholders})'
+
+        _turso_execute(http_url, token, [
+            {"type": "execute", "stmt": {"sql": f'DELETE FROM "{table}"'}}
+        ])
+
+        # 4. INSERTs en chunks de 50 para evitar límite de Turso
+        CHUNK = 50
+        for i in range(0, len(rows), CHUNK):
+            chunk = rows[i:i + CHUNK]
+            batch = []
+            for row in chunk:
+                args = []
+                for v in row:
+                    if v is None:
+                        args.append({"type": "null"})
+                    elif isinstance(v, bool):
+                        args.append({"type": "integer", "value": "1" if v else "0"})
+                    elif isinstance(v, int):
+                        args.append({"type": "integer", "value": str(v)})
+                    elif isinstance(v, float):
+                        args.append({"type": "float", "value": v})
+                    elif isinstance(v, bytes):
+                        import base64
+                        args.append({"type": "blob", "base64": base64.b64encode(v).decode()})
+                    else:
+                        args.append({"type": "text", "value": str(v)})
+                batch.append({"type": "execute", "stmt": {"sql": insert_sql, "args": args}})
+            _turso_execute(http_url, token, batch)
+
+        print(f"  [OK] {table}: {len(rows)} registros -> Turso Cloud")
+        synced += 1
+
+    except Exception as e:
+        print(f"  [WARN] {table}: {e}")
+        skipped += 1
+
+conn.close()
+
+print()
+print("=" * 50)
+print("SINCRONIZACION COMPLETADA!")
+print(f"  Tablas sincronizadas: {synced}")
+print(f"  Tablas sin datos:     {len(tables) - synced - skipped}")
+print(f"  Errores:              {skipped}")
+print("=" * 50)
+print("Haz Reboot en Streamlit Cloud para ver los cambios.")
