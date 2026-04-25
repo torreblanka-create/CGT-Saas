@@ -58,6 +58,16 @@ Documentacion_Soporte/
 assets/logos_clientes/
 # assets/backgrounds/ — Comentado: contiene logo_portada.jpg y fondos necesarios para login
 
+# ── Archivos locales de Cline/Claude ────────────────────────────────
+.claude/
+.claude/*
+
+# ── Cache de voz ────────────────────────────────────────────────────
+assets/voice_cache/
+
+# ── Archivos de tareas temporales ───────────────────────────────────
+TASK_PROGRESS.md
+
 # ── Scripts de ejecución local (Windows) ────────────────────────────
 *.bat
 *.vbs
@@ -65,4 +75,3 @@ assets/logos_clientes/
 # ── Archivos de configuración temporal ───────────────────────────────
 *.toml.py
 tmp/_scan_imports.py
-".claude/"  
