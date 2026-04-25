@@ -79,6 +79,9 @@ def turso_pull(local_db_path: str):
     if not url or not token:
         return
 
+    # Asegurar que el directorio existe antes de intentar abrir la BD
+    ensure_db_dir(local_db_path)
+
     http_url = _turso_http_url(url)
     try:
         # 1. Obtener lista de tablas en Turso
@@ -144,6 +147,9 @@ def turso_push(local_db_path: str):
     url, token = _turso_credentials()
     if not url or not token:
         return
+
+    # Asegurar que el directorio existe antes de intentar abrir la BD
+    ensure_db_dir(local_db_path)
 
     http_url = _turso_http_url(url)
     conn = sqlite3.connect(local_db_path, timeout=30)
