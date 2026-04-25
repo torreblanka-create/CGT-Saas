@@ -335,8 +335,8 @@ class SecurityEngine:
         
         try:
             from src.infrastructure.database import obtener_dataframe
-            query = f"SELECT rol FROM seguridad_usuarios WHERE id = '{usuario_id}' AND activo = 1"
-            df = obtener_dataframe(self.db_path, query)
+            query = "SELECT rol FROM seguridad_usuarios WHERE id = ? AND activo = 1"
+            df = obtener_dataframe(self.db_path, query, (usuario_id,))
             return df.iloc[0]['rol'] if not df.empty else None
         except Exception as e:
             logger.error(f"Error obteniendo rol: {e}")

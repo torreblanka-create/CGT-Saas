@@ -16,7 +16,17 @@ tmp/
 .env
 .env.*
 !.env.example
+SECRETS_READY.toml
 .streamlit/secrets.toml
+!.streamlit/secrets.toml.example
+
+# ── Archivos de configuración con credenciales ──────────────────────
+config/*.secret.*
+config/*.key
+config/*.cert
+*.pem
+*.key
+*.cert
 
 # ── Archivos generados / caché Python ───────────────────────────────
 __pycache__/

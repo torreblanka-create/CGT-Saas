@@ -368,8 +368,6 @@ class FilesEngine:
 
 # ============ FUNCIONES COMPATIBILIDAD (LEGACY) + MEJORADAS ============
 
-# ============ FUNCIONES COMPATIBILIDAD (LEGACY) + MEJORADAS ============
-
 def asegurar_estructura_base():
     """Crea la carpeta raíz del sistema (CGT_DATA) si no existe."""
     engine = obtener_files_engine()
@@ -410,16 +408,31 @@ def obtener_files_engine(db_path: str = None, base_dir: str = None) -> FilesEngi
 
 # ============ FUNCIONES LEGACY ADICIONALES (PARA COMPATIBILIDAD) ============
 
+def _sanitizar_path_component(componente: str) -> str:
+    """Sanitiza un componente de ruta para prevenir path traversal"""
+    if not componente:
+        return ""
+    # Remover caracteres peligrosos
+    peligrosos = ["..", "/", "\\", ":", "*", "?", "\"", "<", ">", "|"]
+    for p in peligrosos:
+        componente = componente.replace(p, "_")
+    return componente.strip().upper()
+
+
 def obtener_ruta_torques(empresa, identificador, contrato=None):
     """LEGACY"""
     return obtener_ruta_entidad(empresa, "Maquinaria_Pesada_Vehiculos", identificador, contrato=contrato, crear_directorios=True)
 
 
 def obtener_ruta_procedimientos(empresa, contrato=None):
-    """LEGACY"""
-    emp_clean = normalizar_texto(empresa).replace(" ", "_")
-    con_clean = normalizar_texto(contrato) if contrato else "GLOBAL"
+    """LEGACY - Genera ruta para procedimientos con validación de path traversal."""
+    emp_clean = _sanitizar_path_component(normalizar_texto(empresa).replace(" ", "_"))
+    con_clean = _sanitizar_path_component(normalizar_texto(contrato) if contrato else "GLOBAL")
     ruta_pts = os.path.join(BASE_DATA_DIR, emp_clean, con_clean, "Documentos_Globales", "Procedimientos_y_Matrices")
+    # Validar path traversal
+    ruta_pts = os.path.normpath(ruta_pts)
+    if not ruta_pts.startswith(os.path.normpath(BASE_DATA_DIR)):
+        raise ValueError("🚨 Path traversal detectado en obtener_ruta_procedimientos")
     os.makedirs(ruta_pts, exist_ok=True)
     os.makedirs(os.path.join(ruta_pts, "Firmas_Difusion"), exist_ok=True)
     os.makedirs(os.path.join(ruta_pts, "Evaluaciones"), exist_ok=True)
@@ -427,20 +440,28 @@ def obtener_ruta_procedimientos(empresa, contrato=None):
 
 
 def obtener_ruta_planes_accion(empresa, contrato, codigo_plan):
-    """LEGACY"""
-    emp_clean = normalizar_texto(empresa)
-    con_clean = normalizar_texto(contrato) if contrato else "SIN_CONTRATO"
-    plan_clean = normalizar_texto(codigo_plan)
+    """LEGACY - Genera ruta para planes de acción con validación de path traversal."""
+    emp_clean = _sanitizar_path_component(normalizar_texto(empresa))
+    con_clean = _sanitizar_path_component(normalizar_texto(contrato) if contrato else "SIN_CONTRATO")
+    plan_clean = _sanitizar_path_component(normalizar_texto(codigo_plan))
     ruta_plan = os.path.join(BASE_DATA_DIR, emp_clean, con_clean, "Planes_Accion", plan_clean, "Evidencias")
+    # Validar path traversal
+    ruta_plan = os.path.normpath(ruta_plan)
+    if not ruta_plan.startswith(os.path.normpath(BASE_DATA_DIR)):
+        raise ValueError("🚨 Path traversal detectado en obtener_ruta_planes_accion")
     os.makedirs(ruta_plan, exist_ok=True)
     return ruta_plan
 
 
 def obtener_ruta_informes_calidad(empresa, contrato):
-    """LEGACY"""
-    emp_clean = normalizar_texto(empresa) if empresa and not pd.isna(empresa) else "EMPRESA_GLOBAL"
-    con_clean = normalizar_texto(contrato) if contrato and not pd.isna(contrato) else "SIN_CONTRATO_ASIGNADO"
+    """LEGACY - Genera ruta para informes de calidad con validación de path traversal."""
+    emp_clean = _sanitizar_path_component(normalizar_texto(empresa) if empresa and not pd.isna(empresa) else "EMPRESA_GLOBAL")
+    con_clean = _sanitizar_path_component(normalizar_texto(contrato) if contrato and not pd.isna(contrato) else "SIN_CONTRATO_ASIGNADO")
     ruta_calidad = os.path.join(BASE_DATA_DIR, emp_clean, con_clean, "Informes_Calidad")
+    # Validar path traversal
+    ruta_calidad = os.path.normpath(ruta_calidad)
+    if not ruta_calidad.startswith(os.path.normpath(BASE_DATA_DIR)):
+        raise ValueError("🚨 Path traversal detectado en obtener_ruta_informes_calidad")
     os.makedirs(ruta_calidad, exist_ok=True)
     return ruta_calidad
 
@@ -474,103 +495,6 @@ def validar_archivo_seguro(file_obj, allowed_types=['pdf', 'png', 'jpg']):
     except Exception as e:
         logger.error(f"Error validando archivo: {e}")
         return False, f"Error: {e}"
-
-def obtener_ruta_entidad(empresa, categoria, identificador, nombre_entidad="", contrato=None, crear_directorios=True):
-    """Genera la ruta jerárquica para guardar documentos y fotos de un activo o persona."""
-    # VALIDACIÓN CRÍTICA: No permitir creación sin empresa o categoría válida
-    emp_clean = normalizar_texto(empresa).strip().replace(" ", "_").upper()
-    cat_clean = normalizar_texto(categoria).strip().replace(" ", "_").upper()
-
-    if not emp_clean or emp_clean in ["NAN", "EMPRESA_NO_DEFINIDA"]:
-        if crear_directorios:
-            raise ValueError(f"🚨 ERROR: Intento de crear directorio para empresa inválida: '{empresa}'")
-        emp_clean = "EMPRESA_NO_DEFINIDA"
-
-    if not cat_clean:
-        if crear_directorios:
-            raise ValueError(f"🚨 ERROR: Categoría inválida para: {identificador}")
-        cat_clean = "COMODIN"
-
-    con_clean = normalizar_texto(contrato).strip().replace(" ", "_").upper() if contrato else "SIN_CONTRATO"
-    if not con_clean or con_clean == "NAN": con_clean = "SIN_CONTRATO"
-
-    id_clean = str(identificador).strip().replace(".", "").replace("-", "").upper()
-
-    if categoria == "Personal" and nombre_entidad:
-        nom_clean = str(nombre_entidad).strip().replace(" ", "_").upper()
-        carpeta_final = f"{nom_clean}_{id_clean}"
-    else:
-        carpeta_final = id_clean
-
-    # --- LÓGICA DE RUTAS FLEXIBLE (Espacios vs Underscores) ---
-    # 1. Intentar con Espacios (Estándar v4.0 / Máxima compatibilidad Windows)
-    emp_norm = normalizar_texto(empresa).strip().upper()
-    con_norm = normalizar_texto(contrato).strip().upper() if contrato else "SIN_CONTRATO"
-    cat_norm = normalizar_texto(categoria).strip().upper()
-    
-    ruta_con_espacios = os.path.join(BASE_DATA_DIR, emp_norm, con_norm, cat_norm, carpeta_final)
-    
-    # 2. Intentar con Underscores (Legacy Fallback)
-    emp_under = emp_norm.replace(" ", "_")
-    con_under = con_norm.replace(" ", "_")
-    cat_under = cat_norm.replace(" ", "_")
-    
-    ruta_con_underscores = os.path.join(BASE_DATA_DIR, emp_under, con_under, cat_under, carpeta_final)
-
-    # 3. Decidir cuál usar basándose en existencia física
-    if os.path.exists(ruta_con_espacios):
-        ruta_final = ruta_con_espacios
-    elif os.path.exists(ruta_con_underscores):
-        ruta_final = ruta_con_underscores
-    else:
-        # Si no existe ninguna, usamos la nueva (con espacios) por defecto para nuevas creaciones
-        ruta_final = ruta_con_espacios
-
-    if crear_directorios:
-        try:
-            os.makedirs(ruta_final, exist_ok=True)
-            for sub in ["Fotos", "Documentos_Vigentes"]:
-                os.makedirs(os.path.join(ruta_final, sub), exist_ok=True)
-
-            if categoria == "Personal":
-                os.makedirs(os.path.join(ruta_final, "EPP_y_Certificaciones"), exist_ok=True)
-            elif cat_clean in ["MAQUINARIA_PESADA_&_VEHICULOS", "MAQUINARIA_PESADA_VEHICULOS"]:
-                os.makedirs(os.path.join(ruta_final, "Certificados_Torque"), exist_ok=True)
-        except Exception as e:
-            raise IOError(f"❌ Error al crear estructura de carpetas: {e}")
-
-    return ruta_final
-
-def obtener_ruta_torques(empresa, identificador, contrato=None):
-    return obtener_ruta_entidad(empresa, "Maquinaria_Pesada_Vehiculos", identificador, contrato=contrato, crear_directorios=True)
-
-def obtener_ruta_procedimientos(empresa, contrato=None):
-    emp_clean = str(empresa).strip().replace(" ", "_").replace("/", "-").upper()
-    con_clean = str(contrato).strip().replace(" ", "_").upper() if contrato else "GLOBAL"
-    ruta_pts = os.path.join(BASE_DATA_DIR, emp_clean, con_clean, "Documentos_Globales", "Procedimientos_y_Matrices")
-    os.makedirs(ruta_pts, exist_ok=True)
-    os.makedirs(os.path.join(ruta_pts, "Firmas_Difusion"), exist_ok=True)
-    os.makedirs(os.path.join(ruta_pts, "Evaluaciones"), exist_ok=True)
-    return ruta_pts
-
-def obtener_ruta_planes_accion(empresa, contrato, codigo_plan):
-    emp_clean = str(empresa).strip().replace(" ", "_").upper()
-    con_clean = str(contrato).strip().replace(" ", "_").upper() if contrato else "SIN_CONTRATO"
-    plan_clean = str(codigo_plan).strip().replace(" ", "_").upper()
-
-    ruta_plan = os.path.join(BASE_DATA_DIR, emp_clean, con_clean, "Planes_Accion", plan_clean, "Evidencias")
-    os.makedirs(ruta_plan, exist_ok=True)
-    return ruta_plan
-
-def obtener_ruta_informes_calidad(empresa, contrato):
-    emp_clean = str(empresa).strip().replace(" ", "_").upper()
-    con_clean = str(contrato).strip().replace(" ", "_").upper()
-    if not emp_clean or emp_clean == "NAN": emp_clean = "EMPRESA_GLOBAL"
-    if not con_clean or con_clean == "NAN": con_clean = "SIN_CONTRATO_ASIGNADO"
-
-    ruta_calidad = os.path.join(BASE_DATA_DIR, emp_clean, con_clean, "Informes_Calidad")
-    os.makedirs(ruta_calidad, exist_ok=True)
-    return ruta_calidad
 
 def obtener_ruta_modulo_especifico(empresa, contrato, modulo, crear=True):
     """
@@ -623,22 +547,6 @@ def obtener_ruta_riesgo_requisito(empresa, contrato, rf_num, cc, req, ev, crear=
         return ruta_final_nueva
 
     return ruta_final_nueva
-
-def normalizar_texto(txt):
-    """Limpia texto de acentos, espacios extra y estandariza de forma robusta."""
-    if txt is None: return ""
-    # Si recibimos una Serie o lista por error, extraemos el primer elemento
-    if hasattr(txt, '__len__') and not isinstance(txt, (str, bytes)):
-        if len(txt) == 0: return ""
-        txt = txt[0] if not hasattr(txt, 'iloc') else txt.iloc[0]
-
-    if pd.isna(txt): return ""
-    s = str(txt).strip()
-    if not s: return ""
-
-    import unicodedata
-    s = ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
-    return s.upper()
 
 def sincronizar_directorios_desde_excel():
     """Lee el Maestro Excel, actualiza la base de Datos y gestiona carpetas de forma segura."""
@@ -715,34 +623,6 @@ def sincronizar_directorios_desde_excel():
         return f"✅ Sincronización Exitosa: {carpetas_creadas} registros procesados."
     except Exception as e:
         return f"❌ Error Crítico: {e}"
-
-def validar_archivo_seguro(file_obj, allowed_types=['pdf', 'png', 'jpg']):
-    """Valida el archivo usando Magic Bytes (Firmas Binarias)."""
-    if file_obj is None: return False, "No se proporcionó ningún archivo"
-
-    # Leer los primeros bytes
-    header = file_obj.read(16)
-    file_obj.seek(0) # IMPORTANTE: Resetear puntero al inicio
-
-    # Firmas conocidas
-    signatures = {
-        'pdf': b'%PDF',
-        'png': b'\x89PNG',
-        'jpg': b'\xff\xd8\xff'
-    }
-
-    # Si es un string único lo convertimos a lista
-    if isinstance(allowed_types, str):
-        allowed_types = [allowed_types]
-
-    # Limpiamos extensiones (quitar puntos y pasar a minúsculas)
-    check_list = [t.lower().replace('.', '').strip() for t in allowed_types] if allowed_types else signatures.keys()
-
-    for t in check_list:
-        if t in signatures and signatures[t] in header:
-            return True, "Archivo válido"
-
-    return False, f"El archivo no coincide con los tipos permitidos ({', '.join(check_list)})"
 
 def organizar_carpetas_sistema(DB_PATH, status_callback=None):
     """
