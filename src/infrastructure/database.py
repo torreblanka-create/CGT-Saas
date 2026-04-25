@@ -473,10 +473,11 @@ def cargar_usuarios(db_path):
 
         # Credenciales Iniciales: se leen desde .env, st.secrets, o fallback seguro.
         # Solo se aplican si el usuario NO existe para no sobreescribir cambios manuales.
-        admin_pw = _get_secret("ADMIN_PASSWORD")
-        rigger_pw = _get_secret("RIGGER_PASSWORD")
-        visita_pw = _get_secret("VISITA_PASSWORD")
-        auditor_pw = _get_secret("AUDITOR_PASSWORD")
+        # FALLBACK: Si no hay secrets configurados, usar contraseñas por defecto
+        admin_pw = _get_secret("ADMIN_PASSWORD") or "ADMIN_CGT_2024"
+        rigger_pw = _get_secret("RIGGER_PASSWORD") or "RIGGER_CGT_2024"
+        visita_pw = _get_secret("VISITA_PASSWORD") or "VISITA_CGT_2024"
+        auditor_pw = _get_secret("AUDITOR_PASSWORD") or "AUDITOR_CGT_2024"
 
         usuarios_base = [
             ("admin", admin_pw, "admin", "Administrador Sistema", 0, 0, "admin@cgt.pro", "Admin", "TI"),
