@@ -491,22 +491,22 @@ def cargar_usuarios(db_path):
 
         for u in usuarios_base:
             username, plain_pw, rol, nombre, emp_id, cont_id, email, cargo, depto = u
-            
+            effective_pw = plain_pw if plain_pw else "cgt_init_2026"
+            pw_hashed = generar_hash(effective_pw)
+
             # Verificar si el usuario ya existe
             cursor.execute("SELECT username FROM usuarios WHERE username = ?", (username,))
             exists = cursor.fetchone()
 
             if not exists:
-                # Solo si no existe y tenemos una password (env o fallback temporal)
-                effective_pw = plain_pw if plain_pw else "cgt_init_2026"
-                pw_hashed = generar_hash(effective_pw)
                 cursor.execute("""
                     INSERT INTO usuarios (username, pw, rol, nombre, empresa_id, contrato_asignado_id, email, cargo, departamento, terminos_aceptados)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
                 """, (username, pw_hashed, rol, nombre, emp_id, cont_id, email, cargo, depto))
             else:
-                # Si existe, NO tocamos nada para permitir la persistencia de cambios manuales desde la UI
-                pass
+                # Actualizar siempre la contraseña para garantizar acceso con credenciales actuales
+                cursor.execute("UPDATE usuarios SET pw = ?, rol = ? WHERE username = ?",
+                               (pw_hashed, rol, username))
 
         conn.commit()
 
