@@ -480,13 +480,13 @@ def cargar_usuarios(db_path):
         auditor_pw = _get_secret("AUDITOR_PASSWORD") or "AUDITOR_CGT_2024"
 
         usuarios_base = [
-            ("admin", admin_pw, "admin", "Administrador Sistema", 0, 0, "admin@cgt.pro", "Admin", "TI"),
+            ("admin", admin_pw, "Global Admin", "Administrador Sistema", 0, 0, "admin@cgt.pro", "Admin", "TI"),
             ("miguel", admin_pw, "Global Admin", "Miguel Rivera", 0, 0, "mrivera@steel.cl", "Gerente de Operaciones", "Directorio"),
             ("francisco", admin_pw, "Global Admin", "Francisco Salvatierra", 0, 0, "fsalvatierra@steel.cl", "Director de Proyectos", "Directorio"),
             ("macarena", admin_pw, "Global Admin", "Macarena Santander", 0, 0, "msantander@steel.cl", "Jefa de Administración", "Finanzas"),
-            ("rigger", rigger_pw, "rigger", "Especialista Rigging", 1, 0, "rigger@cgt.pro", "Rigger de Izaje", "Operaciones"),
-            ("visita", visita_pw, "visita", "Supervisor Cliente", 1, 0, "visita@cliente.cl", "Inspector HSE", "Seguridad"),
-            ("auditor", auditor_pw, "auditor", "Auditor Experto", 1, 0, "auditor@cgt.pro", "Auditor SGI", "Calidad")
+            ("rigger", rigger_pw, "Rigger", "Especialista Rigging", 1, 0, "rigger@cgt.pro", "Rigger de Izaje", "Operaciones"),
+            ("visita", visita_pw, "Visita", "Supervisor Cliente", 1, 0, "visita@cliente.cl", "Inspector HSE", "Seguridad"),
+            ("auditor", auditor_pw, "Auditor", "Auditor Experto", 1, 0, "auditor@cgt.pro", "Auditor SGI", "Calidad")
         ]
 
         for u in usuarios_base:
