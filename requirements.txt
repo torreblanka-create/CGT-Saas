@@ -37,4 +37,4 @@ gTTS>=2.5.0
 requests>=2.31.0
 
 # ── Cloud Database (Turso - SQLite Distribuido) ──────────────────
-pyturso>=0.1.0
+libsql-client>=0.1.0

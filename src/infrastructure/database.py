@@ -524,7 +524,11 @@ def cargar_usuarios(db_path):
                 pass
 
         conn.commit()
+
+        # Obtener usuarios via pandas
         df_usr = pd.read_sql_query("SELECT * FROM usuarios", conn)
+        if df_usr.empty:
+            return {}
         return df_usr.set_index('username').to_dict('index')
 
 def upsert_registro(db_path, data):

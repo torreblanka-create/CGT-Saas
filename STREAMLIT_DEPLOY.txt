@@ -1,0 +1,54 @@
+STREAMLIT CLOUD DEPLOYMENT - QUICK START (v2.0 - Turso Sync)
+
+1. GO TO: https://share.streamlit.io
+2. CLICK: "New app"
+3. CLICK: "Paste GitHub URL"
+4. PASTE: https://github.com/torreblanka-create/CGT-Saas
+5. CONTINUE
+
+Fields should auto-fill:
+- Repository: torreblanka-create/CGT-Saas
+- Branch: main
+- Main file: app.py
+
+6. CLICK: "Deploy"
+7. WAIT: ~2-3 minutes for first deploy
+
+ONCE DEPLOYED:
+8. CLICK: Settings (⚙️ bottom right)
+9. CLICK: "Secrets"
+10. PASTE THIS (with YOUR Turso values):
+
+---BEGIN SECRETS---
+
+# ── Turso Database (Sincronización real implementada v2.0) ──
+LIBSQL_DB_URL = "libsql://cgt-saas-prod-[YOUR-ORG].turso.io"
+LIBSQL_DB_AUTH_TOKEN = "eyJhbGciOi..."
+TURSO_ENV = "sync"
+
+# ── Contraseñas seguras (CAMBIAR EN PRODUCCIÓN) ──
+ADMIN_PASSWORD = "CgT_Admin#2026!"
+RIGGER_PASSWORD = "Rigg3r#S3cur3!"
+VISITA_PASSWORD = "Vis1t4#2026!"
+AUDITOR_PASSWORD = "CgT_Admin#2026!"
+
+# ── Google Gemini AI ──
+GEMINI_API_KEY = ""
+
+---END SECRETS---
+
+11. CLICK: "Save"
+12. Streamlit auto-restarts
+
+VERIFY:
+- Login: https://[app-name].streamlit.app
+- Username: miguel
+- Password: (your ADMIN_PASSWORD)
+- Create test record
+- Settings → "Reboot app"
+- ✅ AHORA LOS DATOS PERSISTEN DESPUÉS DEL REBOOT (Turso Sync v2.0)
+
+GET TURSO VALUES:
+From Turso Dashboard (https://dashboard.turso.io):
+- LIBSQL_DB_URL: turso db show --url cgt-saas-prod
+- LIBSQL_DB_AUTH_TOKEN: turso db tokens create cgt-saas-prod

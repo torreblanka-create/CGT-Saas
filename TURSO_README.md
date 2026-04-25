@@ -1,8 +1,15 @@
-# Turso Integration - Technical Guide for Developers
+# Turso Integration - Technical Guide for Developers (v2.0)
 
 ## Architecture Overview
 
-CGT SaaS ahora usa Turso (SQLite distribuido) para persistencia en producción, mientras mantiene compatibilidad con desarrollo local offline.
+CGT SaaS ahora usa **Turso (SQLite distribuido) con sincronización real** para persistencia en producción, mientras mantiene compatibilidad con desarrollo local offline.
+
+### ✅ ¡Sincronización implementada!
+El adaptador `turso_adapter.py` v2.0 ahora realiza:
+- **Pull** automático al iniciar la app (cloud → local)
+- **Push** automático en cada commit (local → cloud)
+- **Push** final al cerrar la conexión
+- Los datos persisten después de reboot en Streamlit Cloud 🎉
 
 ### Three Operating Modes
 

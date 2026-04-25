@@ -12,7 +12,11 @@
       "Read(//tmp/**)",
       "Bash(python -m pyflakes app.py routes.py config core src vistas intelligence)",
       "Bash(python -c ' *)",
-      "Bash(python tmp/_scan_imports.py)"
+      "Bash(python tmp/_scan_imports.py)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(powershell -Command \"irm get.scoop.sh | iex\")",
+      "Bash(powershell -Command \"scoop install turso\")",
+      "Bash(powershell -Command \"choco install turso -y\")"
     ]
   }
 }

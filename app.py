@@ -1,8 +1,10 @@
 # CGT SaaS - Forced Reload v1.5.3 (UI Update)
 import base64
+import hashlib
 import os
 import random
-from datetime import datetime
+import time
+from datetime import datetime, timedelta
 
 import bcrypt
 import pandas as pd
@@ -484,24 +486,55 @@ def run_cgt_app():
                 submit = st.form_submit_button("Ingresar al Portal", use_container_width=True, type="primary")
                 
                 if submit:
-                    login_input = username.strip().lower()
-                    u = None
-                    for usr_key, usr_val in st.session_state.users.items():
-                        if usr_key.lower() == login_input: 
-                            u = usr_val
-                            username = usr_key
-                            break
+                    # ── RATE LIMITING: Protección contra fuerza bruta ──
+                    login_ip_hash = hashlib.sha256((username.strip().lower() + str(datetime.now().date())).encode()).hexdigest()
+                    if "login_attempts" not in st.session_state:
+                        st.session_state.login_attempts = {}
                     
-                    if u and bcrypt.checkpw(password.encode('utf-8'), u['pw'].encode('utf-8')):
-                        st.session_state.update({
-                            'logged_in': True, 'role': u["rol"], 'username': u["nombre"], 'user_login': username,
-                            'empresa_id': u.get("empresa_id", 0), 'contrato_id': u.get("contrato_asignado_id", 0),
-                            'must_accept_terms': (u.get("terminos_aceptados", 0) == 0)
-                        })
-                        registrar_log(DB_PATH, username, "LOGIN", "Acceso exitoso")
-                        st.rerun()
+                    # Limpiar intentos antiguos (> 15 minutos)
+                    now = time.time()
+                    st.session_state.login_attempts = {
+                        k: v for k, v in st.session_state.login_attempts.items()
+                        if now - v["timestamp"] < 900  # 15 minutos
+                    }
+                    
+                    # Verificar si el usuario está bloqueado temporalmente
+                    user_attempts = st.session_state.login_attempts.get(login_ip_hash, {"count": 0, "timestamp": now})
+                    if user_attempts["count"] >= 5:
+                        st.error("🔒 Demasiados intentos fallidos. Espere 15 minutos antes de intentar nuevamente.")
+                        registrar_log(DB_PATH, username.strip().lower(), "LOGIN_BLOCKED", "Rate limit excedido")
                     else:
-                        st.error("Credenciales inválidas. Por favor intente de nuevo.")
+                        login_input = username.strip().lower()
+                        u = None
+                        for usr_key, usr_val in st.session_state.users.items():
+                            if usr_key.lower() == login_input: 
+                                u = usr_val
+                                username = usr_key
+                                break
+                        
+                        if u and bcrypt.checkpw(password.encode('utf-8'), u['pw'].encode('utf-8')):
+                            # Login exitoso: resetear contador
+                            st.session_state.login_attempts.pop(login_ip_hash, None)
+                            st.session_state.update({
+                                'logged_in': True, 'role': u["rol"], 'username': u["nombre"], 'user_login': username,
+                                'empresa_id': u.get("empresa_id", 0), 'contrato_id': u.get("contrato_asignado_id", 0),
+                                'must_accept_terms': (u.get("terminos_aceptados", 0) == 0)
+                            })
+                            registrar_log(DB_PATH, username, "LOGIN", "Acceso exitoso")
+                            st.rerun()
+                        else:
+                            # Login fallido: incrementar contador
+                            st.session_state.login_attempts[login_ip_hash] = {
+                                "count": user_attempts["count"] + 1,
+                                "timestamp": now
+                            }
+                            remaining = 5 - (user_attempts["count"] + 1)
+                            if remaining > 0:
+                                st.error(f"Credenciales inválidas. Intentos restantes: {remaining}")
+                            else:
+                                st.error("🔒 Demasiados intentos fallidos. Espere 15 minutos.")
+                            registrar_log(DB_PATH, username.strip().lower(), "LOGIN_FAILED", f"Intento fallido #{user_attempts['count'] + 1}")
+
         st.stop()
 
     if st.session_state.must_accept_terms:
