@@ -169,8 +169,8 @@ class RiskEvaluationEngineRF01_RF10:
     def _clasificar(self, pct: float) -> str:
         if pct >= 90: return "CUMPLE \u2705"
         elif pct >= 75: return "PARCIAL \u26a0\ufe0f"
-        elif pct >= 50: return "DEFICIENTE \ud83d\udea8"
-        else: return "CRITICO \ud83d\udd34"
+        elif pct >= 50: return "DEFICIENTE \U0001F6A8"
+        else: return "CR\xcdTICO \U0001F534"
     
     def _extraer_nombre(self, rf_id: str) -> str:
         try:

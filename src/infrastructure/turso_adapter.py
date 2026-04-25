@@ -236,11 +236,7 @@ class TursoConnection:
             except Exception:
                 pass
 
-        if self.env == "sync":
-            try:
-                turso_pull(db_path)
-            except Exception as e:
-                logger.warning(f"Pull inicial fallido (continuando): {e}")
+        # Pull NO se hace aquí — solo en get_turso_connection (sesión Streamlit)
 
     def cursor(self):
         return self._conn.cursor()
@@ -276,7 +272,8 @@ class TursoConnection:
 def get_turso_connection(db_path, turso_url=None, turso_token=None):
     """
     Context manager para conexión Turso/SQLite.
-    Pull automático al entrar, push en commit.
+    Hace pull de Turso al entrar (solo en modo sync).
+    Push ocurre en cada commit().
     """
     env = os.getenv("TURSO_ENV", "local")
     try:
@@ -284,6 +281,13 @@ def get_turso_connection(db_path, turso_url=None, turso_token=None):
         env = env or st.secrets.get("TURSO_ENV", "local")
     except Exception:
         pass
+
+    # Pull al inicio de la sesión (trae datos frescos de Turso)
+    if env == "sync":
+        try:
+            turso_pull(db_path)
+        except Exception as e:
+            logger.warning(f"Pull inicial fallido (continuando en local): {e}")
 
     conn = TursoConnection(db_path, env)
     try:

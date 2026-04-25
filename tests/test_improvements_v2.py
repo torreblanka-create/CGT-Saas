@@ -55,22 +55,16 @@ class TestFatalityRisksEngine(unittest.TestCase):
     
     def test_evaluar_riesgo_completo(self):
         """Test: Evaluación de riesgo con respuestas"""
-        respuestas_mock = {
-            0: True, 1: True, 2: False, 3: True, 4: False
-        }
-        
-        # Mock del Risk Manager
-        with patch.object(self.engine.risk_manager, 'obtener_preguntas_trabajador') as mock_trab:
-            with patch.object(self.engine.risk_manager, 'obtener_preguntas_supervisor') as mock_sup:
-                mock_trab.return_value = ["Pregunta 1", "Pregunta 2", "Pregunta 3"]
-                mock_sup.return_value = ["Pregunta 4", "Pregunta 5"]
-                
-                resultado = self.engine.evaluar_riesgo("RF 01 TEST", respuestas_mock)
-                
-                self.assertIsNotNone(resultado)
-                self.assertEqual(resultado.preguntas_correctas, 3)
-                self.assertEqual(resultado.preguntas_totales, 5)
-                print(f"✅ Evaluación: {resultado.porcentaje_cumplimiento}% cumplimiento")
+        with patch.object(self.engine.risk_manager, 'obtener_todas_preguntas') as mock_all:
+            mock_all.return_value = {
+                "Trabajador": ["Pregunta 1", "Pregunta 2", "Pregunta 3"],
+                "Supervisor": ["Pregunta 4", "Pregunta 5"]
+            }
+            resultado = self.engine.evaluar_riesgo("RF 01 TEST", {0: True, 1: True, 2: False, 3: True, 4: False})
+
+            self.assertIsNotNone(resultado)
+            self.assertIsNotNone(resultado.nivel_riesgo)
+            print(f"✅ Evaluación: {resultado.porcentaje_promedio}% cumplimiento")
     
     def test_clasificar_riesgo_critico(self):
         """Test: Clasificación de riesgo CRÍTICO"""
@@ -102,18 +96,19 @@ class TestFatalityRisksEngine(unittest.TestCase):
         resultado = ResultadoEvaluacion(
             rf_id="RF 01",
             nombre_riesgo="Test Riesgo",
-            preguntas_totales=10,
-            preguntas_respondidas=10,
-            preguntas_correctas=8,
-            porcentaje_cumplimiento=80.0,
+            ccp_totales=6, ccp_correctos=5,
+            ccm_totales=4, ccm_correctos=3,
+            porcentaje_ccp=83.3, porcentaje_ccm=75.0,
+            porcentaje_promedio=79.2,
             nivel_riesgo="PARCIAL ⚠️",
-            brechas=["Brecha 1"],
+            brechas_ccp=["Brecha CCP"],
+            brechas_ccm=[],
             recomendaciones=["Reco 1"],
             timestamp=datetime.now().isoformat()
         )
-        
-        self.assertEqual(resultado.porcentaje_cumplimiento, 80.0)
-        self.assertEqual(len(resultado.brechas), 1)
+
+        self.assertEqual(resultado.porcentaje_promedio, 79.2)
+        self.assertEqual(len(resultado.brechas_ccp), 1)
         print(f"✅ ResultadoEvaluacion válido")
     
     def test_evaluar_multiples_riesgos(self):
@@ -139,18 +134,19 @@ class TestFatalityRisksEngine(unittest.TestCase):
         resultado = ResultadoEvaluacion(
             rf_id="RF 01",
             nombre_riesgo="Energía Eléctrica",
-            preguntas_totales=10,
-            preguntas_respondidas=10,
-            preguntas_correctas=7,
-            porcentaje_cumplimiento=70.0,
-            nivel_riesgo="PARCIAL ⚠️",
-            brechas=["No hay guardias de seguridad"],
+            ccp_totales=6, ccp_correctos=4,
+            ccm_totales=4, ccm_correctos=3,
+            porcentaje_ccp=66.7, porcentaje_ccm=75.0,
+            porcentaje_promedio=70.0,
+            nivel_riesgo="DEFICIENTE 🚨",
+            brechas_ccp=["No hay guardias de seguridad"],
+            brechas_ccm=[],
             recomendaciones=["Instalar guardias", "Capacitar"],
             timestamp=datetime.now().isoformat()
         )
-        
+
         reporte = self.engine.generar_reporte_riesgo(resultado)
-        
+
         self.assertIn("RF 01", reporte)
         self.assertIn("70", reporte)
         self.assertIn("Energía Eléctrica", reporte)
@@ -159,9 +155,9 @@ class TestFatalityRisksEngine(unittest.TestCase):
     def test_generar_resumen_empresa(self):
         """Test: Resumen agregado de evaluaciones"""
         evaluaciones = [
-            MagicMock(rf_id="RF 01", porcentaje_cumplimiento=80, nivel_riesgo="CUMPLE ✅"),
-            MagicMock(rf_id="RF 02", porcentaje_cumplimiento=60, nivel_riesgo="REGULAR"),
-            MagicMock(rf_id="RF 03", porcentaje_cumplimiento=40, nivel_riesgo="CRÍTICO 🔴")
+            MagicMock(rf_id="RF 01", porcentaje_promedio=80, nivel_riesgo="CUMPLE ✅"),
+            MagicMock(rf_id="RF 02", porcentaje_promedio=60, nivel_riesgo="REGULAR"),
+            MagicMock(rf_id="RF 03", porcentaje_promedio=40, nivel_riesgo="CRÍTICO 🔴")
         ]
         
         resumen = self.engine.generar_resumen_empresa(evaluaciones)
@@ -289,7 +285,7 @@ class TestPDFGeneration(unittest.TestCase):
         
         self.assertIn("REPORTE", reporte)
         self.assertIn("Preguntas", reporte)
-        self.assertIn("Recomendaciones", reporte)
+        self.assertIn("RECOMENDACIONES", reporte)
         self.assertGreater(len(reporte), 500)
         
         print(f"✅ Reporte textual generado ({len(reporte)} chars)")

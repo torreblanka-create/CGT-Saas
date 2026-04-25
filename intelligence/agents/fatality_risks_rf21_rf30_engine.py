@@ -86,7 +86,7 @@ class RiskEvaluationEngineRF21_RF30:
     def generar_reporte_completo(self, evaluacion: EvaluacionRF) -> str:
         lines = []
         lines.append("=" * 60)
-        lines.append("EVALUACION COMPLETA - RF21-RF30 (CRITICOS)")
+        lines.append("EVALUACI\xd3N COMPLETA - RF21-RF30 (CR\xcdTICOS)")
         lines.append("=" * 60)
         lines.append(f"RF: {evaluacion.rf_id}")
         lines.append(f"Riesgo: {evaluacion.nombre_riesgo}")
@@ -109,8 +109,8 @@ class RiskEvaluationEngineRF21_RF30:
     def _clasificar(self, pct: float) -> str:
         if pct >= 90: return "CUMPLE \u2705"
         elif pct >= 75: return "PARCIAL \u26a0\ufe0f"
-        elif pct >= 50: return "DEFICIENTE \ud83d\udea8"
-        else: return "CRITICO \ud83d\udd34"
+        elif pct >= 50: return "DEFICIENTE \U0001F6A8"
+        else: return "CR\xcdTICO \U0001F534"
     
     def _extraer_nombre(self, rf_id: str) -> str:
         try: return rf_id.split(" ", 2)[2]
@@ -129,8 +129,8 @@ class RiskEvaluationEngineRF21_RF30:
         
         # Recomendaciones especificas por tipo de riesgo
         rf_upper = rf_id.upper()
-        if "ARSENICO" in rf_upper:
-            recos.append("Implementar vigilancia medica obligatoria para exposicion a arsenico")
+        if "ARSENICO" in rf_upper or "ARSÉNICO" in rf_upper:
+            recos.append("Vigilancia medica obligatoria y monitoreo de exposicion a arsenico")
             recos.append("Monitoreo ambiental de niveles de arsenico en area de trabajo")
         if "COLAPSO" in rf_upper or "MACIZO" in rf_upper:
             recos.append("Monitoreo geotecnico continuo del macizo rocoso")

@@ -127,12 +127,12 @@ class TestRF11_RF20Engine(unittest.TestCase):
     
     def test_evaluar_caida_objetos(self):
         """Test: Evaluación RF13 - Caída de Objetos"""
-        respuestas = {i: True for i in range(4)}
-        resultado = self.engine.evaluar_rf(
-            "RF 13 CAÍDA DE OBJETOS",
-            respuestas
-        )
-        
+        trabaj = self.engine.obtener_preguntas_rf("RF 13 CAÍDA DE OBJETOS", "trabajador")
+        super_ = self.engine.obtener_preguntas_rf("RF 13 CAÍDA DE OBJETOS", "supervisor")
+        total = len(trabaj) + len(super_)
+        respuestas = {i: True for i in range(total)}
+        resultado = self.engine.evaluar_rf("RF 13 CAÍDA DE OBJETOS", respuestas)
+
         self.assertEqual(resultado.nivel_riesgo, "CUMPLE ✅")
         print(f"✅ RF13 en cumplimiento")
     
@@ -197,14 +197,12 @@ class TestRF21_RF30Engine(unittest.TestCase):
     
     def test_evaluar_colapso_estructural(self):
         """Test: Evaluación RF23 - Colapso Estructural"""
-        preguntas = self.engine.obtener_preguntas_rf("RF 23 COLAPSO ESTRUCTURAL DEL MACIZO ROCOSO", "trabajador")
-        respuestas = {i: True for i in range(len(preguntas))}
-        
-        resultado = self.engine.evaluar_rf(
-            "RF 23 COLAPSO ESTRUCTURAL DEL MACIZO ROCOSO",
-            respuestas
-        )
-        
+        trabaj = self.engine.obtener_preguntas_rf("RF 23 COLAPSO ESTRUCTURAL DEL MACIZO ROCOSO", "trabajador")
+        super_ = self.engine.obtener_preguntas_rf("RF 23 COLAPSO ESTRUCTURAL DEL MACIZO ROCOSO", "supervisor")
+        total = len(trabaj) + len(super_)
+        respuestas = {i: True for i in range(total)}
+        resultado = self.engine.evaluar_rf("RF 23 COLAPSO ESTRUCTURAL DEL MACIZO ROCOSO", respuestas)
+
         self.assertEqual(resultado.nivel_riesgo, "CUMPLE ✅")
         print(f"✅ RF23 Colapso en cumplimiento")
     

@@ -284,7 +284,7 @@ class RiskManager:
         texto_lower = texto_busqueda.lower()
         
         # Definir riesgos a buscar
-        riesgos_a_buscar = {rf_id: self.obtener_riesgo(rf_id)} if rf_id else self.riesgos.items()
+        riesgos_a_buscar = {rf_id: self.obtener_riesgo(rf_id)} if rf_id else self.riesgos
         
         for rid, datos in riesgos_a_buscar.items():
             if not datos:

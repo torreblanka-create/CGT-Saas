@@ -86,7 +86,7 @@ class RiskEvaluationEngineRF11_RF20:
     def generar_reporte_rf(self, evaluacion: EvaluacionRF) -> str:
         lines = []
         lines.append("=" * 60)
-        lines.append("EVALUACION DE RIESGO FATAL RF11-RF20")
+        lines.append("EVALUACI\xd3N DE RIESGO FATAL RF11-RF20")
         lines.append("=" * 60)
         lines.append(f"RF: {evaluacion.rf_id}")
         lines.append(f"Riesgo: {evaluacion.nombre_riesgo}")
@@ -105,8 +105,8 @@ class RiskEvaluationEngineRF11_RF20:
     def _clasificar(self, pct: float) -> str:
         if pct >= 90: return "CUMPLE \u2705"
         elif pct >= 75: return "PARCIAL \u26a0\ufe0f"
-        elif pct >= 50: return "DEFICIENTE \ud83d\udea8"
-        else: return "CRITICO \ud83d\udd34"
+        elif pct >= 50: return "DEFICIENTE \U0001F6A8"
+        else: return "CR\xcdTICO \U0001F534"
     
     def _extraer_nombre(self, rf_id: str) -> str:
         try: return rf_id.split(" ", 2)[2]

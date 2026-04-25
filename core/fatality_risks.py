@@ -259,7 +259,30 @@ class FatalityRisksEngine:
             return False
             
     # ============ CONSULTAS Y REPORTES ============
-    
+
+    def generar_reporte_riesgo(self, resultado: ResultadoEvaluacion) -> str:
+        lines = ["=" * 60, f"REPORTE - {resultado.rf_id}",
+                 f"Riesgo: {resultado.nombre_riesgo}",
+                 f"Nivel: {resultado.nivel_riesgo}",
+                 f"CCP: {resultado.porcentaje_ccp}% | CCM: {resultado.porcentaje_ccm}%",
+                 f"Promedio: {resultado.porcentaje_promedio}%"]
+        if resultado.recomendaciones:
+            lines.append("RECOMENDACIONES")
+            for r in resultado.recomendaciones:
+                lines.append(f"  - {r}")
+        lines.append("=" * 60)
+        return "\n".join(lines)
+
+    def generar_resumen_empresa(self, evaluaciones: List[ResultadoEvaluacion]) -> Dict:
+        total = len(evaluaciones)
+        if total == 0:
+            return {'total_riesgos': 0, 'riesgos_en_cumple': 0, 'riesgos_criticos': 0, 'promedio_cumplimiento': 0}
+        en_cumple = sum(1 for e in evaluaciones if "CUMPLE" in str(getattr(e, 'nivel_riesgo', '')))
+        criticos = sum(1 for e in evaluaciones if "CRÍTICO" in str(getattr(e, 'nivel_riesgo', '')) or "CRITICO" in str(getattr(e, 'nivel_riesgo', '')))
+        promedio = sum(getattr(e, 'porcentaje_promedio', 0) for e in evaluaciones) / total
+        return {'total_riesgos': total, 'riesgos_en_cumple': en_cumple,
+                'riesgos_criticos': criticos, 'promedio_cumplimiento': round(promedio, 1)}
+
     def obtener_historico_empresa(self, empresa_id: int, ultimas_n: int = 10) -> List[Dict]:
         """Obtiene histórico de evaluaciones de una empresa"""
         if not self.db_path:

@@ -82,24 +82,7 @@ def obtener_conexion(db_path):
     """Retorna una conexión Turso/SQLite directa (sin context manager)."""
     from src.infrastructure.turso_adapter import TursoConnection
     env = os.getenv("TURSO_ENV", "local")
-    turso_url = os.getenv("LIBSQL_DB_URL")
-    turso_token = os.getenv("LIBSQL_DB_AUTH_TOKEN")
-
-    # Fallback a st.secrets si disponible
-    if not turso_url:
-        try:
-            import streamlit as st
-            turso_url = st.secrets.get("LIBSQL_DB_URL")
-            turso_token = st.secrets.get("LIBSQL_DB_AUTH_TOKEN")
-        except Exception:
-            pass
-
-    conn = TursoConnection(db_path, turso_url, turso_token, env)
-    if env == "local":
-        try:
-            conn.execute("PRAGMA journal_mode=WAL")
-        except Exception:
-            pass
+    conn = TursoConnection(db_path, env)
     return conn
 
 def ejecutar_query(db_path, query, params=(), commit=False):

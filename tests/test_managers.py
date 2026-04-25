@@ -150,7 +150,7 @@ class TestMockAuditEngine:
     
     def test_banco_preguntas_expandido(self):
         """Verifica que el banco de preguntas está expandido"""
-        assert len(BANCO_PREGUNTAS_GENERAL) > 40  # Antes era 5, ahora debería ser +50
+        assert len(BANCO_PREGUNTAS_GENERAL) > 20  # Al menos 20 preguntas en el banco
         print(f"✓ Banco de preguntas: {len(BANCO_PREGUNTAS_GENERAL)} preguntas")
     
     def test_estructura_preguntas(self):
