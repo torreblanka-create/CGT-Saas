@@ -12,6 +12,10 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from src.infrastructure.archivos import asegurar_estructura_base
+from src.infrastructure.db_init import initialize_environment
+
+# 🔧 Inicializar entorno de BD (CRÍTICO - debe ser lo primero)
+initialize_environment()
 
 # --- 1. IMPORTACIONES DEL NÚCLEO (CORE) ---
 from config.config import (

@@ -74,9 +74,12 @@ def turso_pull(local_db_path: str):
     """
     Descarga todas las tablas de Turso Cloud → SQLite local.
     Sobreescribe solo tablas que existen en Turso.
+
+    ℹ️ Se salta silenciosamente si no hay credenciales válidas.
     """
     url, token = _turso_credentials()
     if not url or not token:
+        logger.debug("Turso: credenciales no disponibles, omitiendo pull")
         return
 
     http_url = _turso_http_url(url)
@@ -90,8 +93,16 @@ def turso_pull(local_db_path: str):
             return
 
         tables = [row[0]["value"] for row in results[0]["rows"]]
-        conn = sqlite3.connect(local_db_path, timeout=30)
-        conn.row_factory = sqlite3.Row
+
+        # Asegurar que el directorio existe
+        ensure_db_dir(local_db_path)
+
+        try:
+            conn = sqlite3.connect(local_db_path, timeout=30)
+            conn.row_factory = sqlite3.Row
+        except Exception as e:
+            logger.debug(f"Turso: no se pudo abrir BD local {local_db_path}: {e}")
+            return
 
         for table in tables:
             try:
@@ -140,14 +151,25 @@ def turso_pull(local_db_path: str):
 def turso_push(local_db_path: str):
     """
     Sube todas las tablas de SQLite local → Turso Cloud.
+
+    ℹ️ Se salta silenciosamente si no hay credenciales válidas o BD local no existe.
     """
     url, token = _turso_credentials()
     if not url or not token:
+        logger.debug("Turso: credenciales no disponibles, omitiendo push")
         return
 
+    # Asegurar que el directorio existe
+    ensure_db_dir(local_db_path)
+
     http_url = _turso_http_url(url)
-    conn = sqlite3.connect(local_db_path, timeout=30)
-    conn.row_factory = sqlite3.Row
+
+    try:
+        conn = sqlite3.connect(local_db_path, timeout=30)
+        conn.row_factory = sqlite3.Row
+    except Exception as e:
+        logger.debug(f"Turso: no se pudo abrir BD local {local_db_path}: {e}")
+        return
 
     try:
         cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")
