@@ -1,0 +1,35 @@
+name: CI — Syntax & Import Check
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Verificar sintaxis Python
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Instalar dependencias de análisis
+        run: pip install pyflakes
+
+      - name: Verificar sintaxis (compileall)
+        run: python -m compileall -q -x "BACKUPS|Pasado|__pycache__|tmp|scratch|landing" .
+
+      - name: Análisis estático (pyflakes — errores críticos)
+        run: |
+          python -m pyflakes app.py routes.py config core src vistas intelligence 2>&1 \
+            | grep "undefined name\|repeated with different" \
+            | grep -v "^$" \
+            && echo "⚠️ Errores críticos encontrados" && exit 1 \
+            || echo "✅ Sin errores críticos"

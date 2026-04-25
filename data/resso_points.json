@@ -1,0 +1,356 @@
+[
+    {
+        "letra": "A",
+        "titulo": "SISTEMA DE GESTION DE SEGURIDAD Y SALUD EN EL TRABAJO (TITULO IV) PREGUNTA DE BONIFICACIÓN",
+        "preguntas": [
+            {
+                "numero": 0,
+                "texto": "¿Sistema de gestión corporativo certificado en OHSAS 18.001 o ISO 45.001?",
+                "ponderacion": 0.05,
+                "criterio": "1.- 100% Sistema de gestión está certificado en el alcance del ctto.\n2.- 50% Si el sistema de gestión está certificado en OHSAS 18.001 o ISO 45.001.\n3.- 30% Si tiene un sistema de Gestión.\n4.- 0% Si no evidencia sistema de Gestión."
+            }
+        ]
+    },
+    {
+        "letra": "B",
+        "titulo": "PROGRAMA DE SEGURIDAD Y SALUD EN EL TRABAJO (TITULO V RESSO)",
+        "preguntas": [
+            {
+                "numero": 1,
+                "texto": "¿En la elaboración del Programa de Seguridad y Salud en el Trabajo de la empresa, se consideró los enunciados de la Política Corporativa de Gestión de Seguridad, Salud en el Trabajo y Riesgos Operacionales de Codelco (descrita en el Título I RESSO) y, en especial, las que contengan las medidas para la prevención y control del riesgo que disponga la autoridad sanitaria para los casos de Pandemias? (Formulario único de fiscalización de medidas preventivas para el Covid-19 en lugares de trabajo)?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100%  Si el programa considera los enunciados de la política.\n2.- 50% Si el programa no considera enunciados de la política.\n3.- 0% Si no evidencia Programa de SST."
+            },
+            {
+                "numero": 2,
+                "texto": "¿Esta Política Corporativa se dio a conocer a todos los trabajadores de la contratista y subcontratistas? Se cuenta con evidencia de ello?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100 %  Si  5 trabajadores entrevistados conocen la política Codelco\n2.- 75 %  Si se evidencia difusión a los trabajadores contratistas y subcontratistas\n3.- 50 % Solo considera al personal contratista (en el caso de tener en su contrato empresas contratista)\n4.- 50% Si se evidencia difusión parcialmente a los trabajadores (en el caso de no tener en su contratos empresas contratistas) \n5.- 0%  No evidencia difusión"
+            },
+            {
+                "numero": 3,
+                "texto": "¿El programa definido para el cumplimiento de los objetivos y metas consistentes en la política de seguridad y salud ocupacional, cuenta con indicadores de desempeño, responsables, recursos y plazos consistentes con la criticidad de las actividades definidas, así también como los 07 Elementos del SIGO de CODELCO?",
+                "ponderacion": 0.07,
+                "criterio": "1.- 100% Si el Programa considera indicadores de desempeño, responsables, recursos y plazos según criticidad. \n2.- 50% Programa definido para el cumplimiento de los objetivos y metas\n3.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 4,
+                "texto": "¿La empresa cuenta con una metodología formal para la identificación y evaluación del marco regulatorio legal que aplica a sus procesos identificando nivel de cumplimiento, programas de brechas y monitoreo??",
+                "ponderacion": 0.04,
+                "criterio": "1.- 100% Si existe formalidad para monitoreo\n2.- 90% Si se monitorea el plan\n3.- 75% Si genera un plan de cierre de brechas\n4.- 60%  Si identifican las  brechas\n5.- 45% Si  la metodología esta formalizada\n6.- 30% Si identifica y evalúa de acuerdo a sus procesos\n7.- 15% Si  el registro  evalúa el cumplimiento del marco regulatorio\n8.-  0% Sin evidencia del punto y/o existe un registro incompleto"
+            },
+            {
+                "numero": 5,
+                "texto": "¿Se dio cumplimiento en plazo a las  instrucciones/observaciones de los organismos y autoridades fiscalizadoras competentes y la de su subcontratos? Si aplica. Informando los resultados al administrador Codelco vía LOD Libro de obra o carta contractual?",
+                "ponderacion": 0.02,
+                "criterio": "1.-  100%  Si  se cumplen dentro de los plazos y se entrega reporte de cumplimiento mensual de contratos a administradores de  Codelco vía LOD, Libro de obra o Carta contractual (VP)\n2.- 66%  Si se da cumplimiento a instrucción dentro de los plazos\n3.- 33%  Si se da cumplimiento a instrucción / obs fuera de plazo\n3.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 6,
+                "texto": "¿El programa de seguridad cuenta con un registro de identificación de peligros y evaluación de riesgos actualizado acorde a las actividades del contrato y está en concordancia con la Carta Gantt del contrato?",
+                "ponderacion": 0.06,
+                "criterio": "1.- 100% Si considera plazos y recursos según criticidad\n2.- 80% Si cuenta con indicadores de desempeño\n3.- 60% Si la Matriz de Riesgos de Procesos está en concordancia con la carta Gantt del contrato\n4.- 40% Si la Matriz de Riesgos de Procesos es acorde a las actividades del contrato\n5.- 20% Si la Mariz de Riesgos de Procesos se encuentra actualizada\n6.- 5% Si cuenta con registro de la Matriz de Riesgos de Procesos\n7.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 7,
+                "texto": "¿El programa de SST cuenta con la validación previa, por parte del organismo administrador del seguro correspondiente?. Además, ¿está suscrito por el representante legal y por el administrador de la empresa contratista?",
+                "ponderacion": 0.04,
+                "criterio": "1.- 100% Si  es firmado por el administrador de contrato y formalizado en LOD\n2.- 60%  Si está validado por el Org Administrador\n3.- 30%  Si está firmado por el representante legal\n4.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 8,
+                "texto": "¿La empresa cuenta con la identificación de los GES (Grupo de Exposición Similar), un Programa de Vigilancia Ambiental, un listado de expuestos y un Programa de Vigilancia Médica en coordinación con el organismo administrador del seguro?\n¿Cumple con las medidas prescritas emitidas por el organismo administrador?",
+                "ponderacion": 0.03,
+                "criterio": "1.- 100% Si cumple con las medidas prescritas emitidas por el organismo administrado\n2.- 60% si existe un Programa Vigilancia Ambiental, un listado de expuestos y un Programa de Vigilancia Médica en coordinación con el organismo administrador del seguro\n3.- 30%  Si identifica las GES\n4.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 9,
+                "texto": "¿Cuenta la empresa contratista con Mapas de Riesgo de Higiene Industrial en el lugar donde realiza sus actividades?, a partir de éstos, ¿se cuenta con un programa de gestión, con responsables, acciones y fechas? ¿Realizo difusión del mapa de riesgo a los trabajadores (as)?",
+                "ponderacion": 0.02,
+                "criterio": "1.-100% si se realiza la difusión del mapa de riesgo con los trabajadores  \n2.- 75% Si el programa asigna responsables, acciones y fechas\n3.- 50%  Si cuenta con programa de gestión\n4.- 25%  Si cuenta con un mapa de Riesgos Higiénicos\n5.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 10,
+                "texto": "¿Tienen identificados, documentados y evaluados los niveles de cumplimiento de los “Riesgos Críticos aplicables (Bowtie) y ECF” que aplican a sus procesos o servicios y cuentan con plan de brechas, si aplica?",
+                "ponderacion": 0.0125,
+                "criterio": "Para el caso que hay conformidad con las listas de verificación:\n1.- 100%  Si es coherente con los procesos que desarrollan\n2.- 50%  Si identifica y evalúa el nivel de cumplimiento de ECF\n3.- 0% sin evidencia del punto\n\nPara el caso que hay no conformidad con las listas de verificación:\n1.- 100% Si  programa asigna responsables acciones y fechas\n2.- 75%  Si  cuenta con un programa de acción\n3.- 50%  Si es coherente con los procesos que desarrollan\n4.- 25%  Si identifica y evalúa el nivel de cumplimiento de ECF\n5.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 11,
+                "texto": "¿Tiene identificado, documentado y evaluado los requisitos  de los “EST” que aplican a sus procesos o servicios y cuenta con plan de brechas, si aplica?",
+                "ponderacion": 0.005,
+                "criterio": "Para el caso que hay conformidad con las listas de verificación:\n1.- 100%  Si es coherente con los procesos que desarrollan\n2.- 50%  Si identifica y evalúa el nivel de cumplimiento de EST\n3.- 0% sin evidencia del punto\n\nPara el caso que hay no conformidad con las listas de verificación:\n1.- 100% Si el programa asigna responsables acciones y fechas\n2.- 75%  Si  cuenta con un programa de acción\n3.- 50%  Si es coherente con los procesos que desarrollan\n4.- 25%  Si identifica y evalúa el nivel de cumplimiento de EST\n5.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 12,
+                "texto": "¿Se cumple y se dispone de evidencias de las actividades definidas en el “Estándar de Liderazgo”, de acuerdo a lo programado?",
+                "ponderacion": 0.005,
+                "criterio": "1.- 100% Si se evidencian actividades definidas en el “Estándar de Liderazgo”\n2.- 60% Si el programa asigna responsables, acciones y fechas\n3.- 30%  Si cuenta con un programa\n4.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 13,
+                "texto": "Se cumple y se dispone de evidencias de actividades definidas en el “Estándar de Seguridad Conductual” de acuerdo a lo programado (N° Observadores, cierre de ciclo, conductas preocupantes y plan de acción)?",
+                "ponderacion": 0.0025,
+                "criterio": "1.- 100% Si el programa asigna responsables, acciones y fechas\n2.- 50%  Si cuenta con un programa de acción\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 14,
+                "texto": "Respecto al “Estándar de Aprendizaje”. ¿Se difunden los reportes de incidentes Divisionales y Corporativos, en especial los que apliquen a su servicio?. Si aplica, ¿la empresa realiza una evaluación de la probabilidad de ocurrencia del incidente y de los controles existentes en su área de responsabilidad?",
+                "ponderacion": 0.005,
+                "criterio": "1.- 100% Si verifica la existencia de controles\n2.- 60% Realiza evaluación de probabilidad  por ocurrencia\n3.- 30% Si se difunden los reportes Div y Corp.\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 15,
+                "texto": "De los incidentes del contrato (Evento Significativo, CTP o STP) ¿se ha realizado la investigación respectiva y las medidas correctivas y preventivas se encuentran cerradas dentro del plazo, de acuerdo a la investigación y se privilegia la definición de medidas de control de alta jerarquía? ¿Estas medidas fueron verificadas en terreno?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si fueron verificadas en terreno\n2.- 75% Si las acciones correctivas están cerradas dentro de plazo\n3.- 50% Si las acciones correctivas son SMARTER\n4.- 25% Si realiza investigación \n5.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 16,
+                "texto": "¿La empresa cuenta con un plan de emergencia formal que considere la comunicación, coordinación y plan de acción ante una emergencia que le afecte y se difundió a sus trabajadores (as)?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si es difundido y conocido por los trabajadores\n2.- 60% Se considera comunicación coordinación y plan de acción ante la emergencia\n3.- 30% Si cuenta con un plan de emergencia\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 17,
+                "texto": "¿La empresa cuenta con un programa de simulacros relacionados a emergencias que afecten a su servicio?",
+                "ponderacion": 0.005,
+                "criterio": "1.-100% Si el plan esta relacionado a emergencias que afectan a su servicio\n2.- 50% Si cuenta con un plan de emergencia\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 18,
+                "texto": "¿La empresa contratista capacita a sus trabajadores, supervisores y línea de mando respecto de los planes de emergencia de Codelco y propios, de las áreas donde ejecutaran sus actividades?",
+                "ponderacion": 0.005,
+                "criterio": "1.- 100% Si capacita a los trabajadores, supervisores y línea de mando en planes de emergencia propios y de Codelco\n2.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 19,
+                "texto": "¿La empresa contratista evaluó los riesgos de un potencial accidente grave o fatal considerando los Riesgos Críticos aplicables (Bowtie) y ECF identificados y de las tareas críticas? ¿De lo anterior se realizó un simulacro documental e implementó las medidas correctivas y preventivas dentro de los plazos definidos?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100%  Si  las acciones correctivas han sido implementadas dentro de plazo\n2.- 90% Si las acciones correctivas fueron implementadas\n3.- 75% Si el simulacro es difundido a todos los trabajadores\n4.- 60% Si el simulacro es acorde a las actividades que ejecutan en el contrato\n5.- 45% Si realiza simulacro documental\n6.- 30% Existe evaluación de un potencial accidente grave considerando ECF y tareas críticas\n7.- 15% Existe evaluación de un potencial accidente grave considerando solo ECF o tareas críticas\n8.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "C",
+        "titulo": "IMPLEMENTACIÓN Y OPERACIÓN (TITULO VI RESSO)",
+        "preguntas": [
+            {
+                "numero": 20,
+                "texto": "¿La empresa informa a todos sus trabajadores (a) a través de la “Obligación de Informar” acerca de los riesgos que entrañan sus labores, de las medidas preventivas y de los métodos de trabajo seguros, antes de iniciar cualquier tipo de actividad? (Evidencia de la Obligación de Informar y la evaluación de comprensión de la misma).",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Evidencia de la Obligación de Informar y la evaluación de comprensión de la misma\n2.- 50% Si la empresa informa a sus trabajadores acerca de los riesgos que entrañan sus labores y en base a estas (por ejemplo descriptor de cargo) desarrollan los peligros, estas se informan, se indican las medidas seguras y métodos de prevención de riesgos\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 21,
+                "texto": "¿La empresa cuenta con un procedimiento de capacitación, en el cual incluye un programa de trabajadores (as) de baja experiencia laboral (BEL)?.",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si se cumple el programa de trabajadores de baja experiencia laboral\n2.- 66% Existe programa de trabajadores de baja experiencia laboral\n3.- 33% Si existe un procedimiento de capacitación con trabajadores con baja experiencia laboral\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 22,
+                "texto": "¿La empresa cuenta con un mecanismo para la participación y consulta de los trabajadores en materias de SST (procedimiento/ instructivos trabajos críticos, matriz de riesgos, etc.)? ¿Considera un plan de motivación y reconocimiento de sus trabajadores?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100%  Si evidencia participación de los trabajadores en materias de SST\n2.- 60% Si se cuenta con un plan de motivación y reconocimiento de sus trabajadores\n3.- 30% Si cuenta con un mecanismo de participación y consulta\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 23,
+                "texto": "¿Tiene la empresa  un mecanismo para asegurar, facilitar y canalizar la participación de sus trabajadores, supervisores y línea de mando en los Comités Paritarios de Higiene y Seguridad de la empresa y/o de Faena?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100%  Si evidencia la participación de los trabajadores en los CPHS\n2.- 50% Si la empresa tiene un mecanismo de participación de los trabajadores\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 24,
+                "texto": "¿La empresa cuenta en su instalación de faena con todos los documentos del Sistema de Gestión de Seguridad y Salud en el Trabajo u Ocupacional, indicados en el Titulo VI de la guía de implementación del RESSO?",
+                "ponderacion": 0.06,
+                "criterio": "1.- 100%  Si cuenta con la totalidad de los documentos SIGO en faena\n2.- 50% Si cuenta con parcialidad de los Documentación del SIGO en faena\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 25,
+                "texto": "¿Cuenta la empresa en faena con un Libro de Obra o de Servicios o Libro de Obra Digital o Carta Contractual VP?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100%  Si administradores de contrato utilizan el Libro de Obra o Libro de Obra Digital o Carta Contractual (VP)\n2.- 50% Si cuenta con el Libro de Obra o Libro de Obra Digital o Carta Contractual (VP)\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 26,
+                "texto": "¿La empresa gestiona en los plazos estipulados por el servicio, a través de un plan, y programa las observaciones detectadas por SERNAGEOMIN y éstas son enviadas por LOD o Carta Contractual al Administrador de Contrato Codelco/VP?.",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si las observaciones están cerradas dentro del plazo y son enviadas por Libro de Obra o Libro de Obra Digital o Carta Contractual (VP)\n2.- 75% Si las observaciones están cerradas fuera de plazo y son enviadas por Libro de Obra o Libro de Obra Digital o Carta Contractual (VP)\n3.- 50% Si la empresa gestiona a través de un plan el cierre de las observaciones\n4.- 25% Si la empresa solicita a Adm de ctto Codelco, por el canal formal  (Libro de Obra o Libro de Obra Digital o Carta Contractual (VP)), si Sernageomin ha levantado observaciones a la empresa  \n5.- 0% Sin evidencia del punto o no está formalizado por Libro de Obra o Libro de Obra Digital o Carta Contractual (VP)"
+            },
+            {
+                "numero": 27,
+                "texto": "¿Cuenta la empresa con un procedimiento interno que asegure que todos los documentos en materia de gestión de seguridad y salud en el trabajo estén disponibles, revisados y actualizados periódicamente?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si son revisados y actualizados periódicamente\n2.- 60% Si están disponibles en la faena\n3.- 30% Si existen procedimientos que asegure los documentos\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 28,
+                "texto": "¿Los trabajadores (as) cuentan con los procedimientos propios de su tarea, en el área de trabajo?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si estos se encuentran en el área de trabajo\n2.- 50% Si los procedimientos disponibles están asociados a su tarea\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 29,
+                "texto": "¿La empresa cuenta con documentos operativos que asignan responsables y las actividades asociadas a las medidas de control necesarias de acuerdo a los Riesgos Críticos aplicables (Bowtie), ECF y EST?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100%  Si estos documentos tienen asociadas medidas de control de acuerdo a los ECF, EST y Riesgos Críticos\n2.- 50% Si los documentos asignan responsables y plazos\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 30,
+                "texto": "¿La empresa realiza auditorías a los Riesgos Críticos aplicables (Bowtie), ECF y EST? De los hallazgos a los Controles Críticos Preventivos levantados en terreno ¿éstos son cerrados e informados al administrador de contrato Codelco?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si los Hallazgos nivel 1 (si aplica) están resueltos en los plazos definidos\n2.- 75% Si las auditorías posee gestión de hallazgos\n3.- 50%  Si cumple con el programa de auditorías\n4.- 25% Si posee un programa de auditorías a los ECF y EST\n5.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "D",
+        "titulo": "RESULTADOS DE FISCALIZACIONES INTERNAS Y EXTERNAS (TITULO VII RESSO)",
+        "preguntas": [
+            {
+                "numero": 31,
+                "texto": "¿La empresa comunica los resultados de las entidades fiscalizadoras o de los organismos administradores de la Ley 16.744 al Administrador de Contrato Codelco y a la Dirección de Seguridad y Salud en el Trabajo de cada División, mediante LOD / Carta Contractual?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100%  Si  comunica los resultados a la dirección de seguridad de la división o VP\n2.- 60% Si la comunicación al Adm ctto es vía LOD/Libro de Obras/Carta Contractual\n3.- 30% Si la empresa comunica al Adm de Ctto los resultados de fiscalizaciones\n4.- 0% sin evidencia del punto"
+            },
+            {
+                "numero": 32,
+                "texto": "¿Existe un programa interno para el cumplimiento de las instrucciones y medidas correctivas emanadas de las autoridades fiscalizadoras externas o de los organismos administradores de la Ley 16.744?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100%  Si cumple las acciones dentro de los plazos establecidos por las autoridades fiscalizadoras externas y/o de los organismos administradores\n2.- 60% Si cumple con las medidas emanadas de las autoridades fiscalizadoras externas y/o de los organismos administradores\n3.- 30% Si existe un programa interno\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 33,
+                "texto": "¿La empresa contratista o subcontratista solicitó y recibió la notificación de su categorización mediante el LOD / Libro de Obra / Carta Contractual enviada por su Administrador de Contrato de Codelco?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si utiliza el LOD / Libro de Obra / Carta Contractual para realizar la solicitud anterior\n2.- 50%  Si la empresa solicitó su categorización al Adm de ctto \n3.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "E",
+        "titulo": "PROCEDIMIENTOS EN CASO DE ACCIDENTES E INCIDENTES (TITULO VIII RESSO)",
+        "preguntas": [
+            {
+                "numero": 34,
+                "texto": "¿Cuenta la empresa con personal capacitado en el método para investigar incidentes definido por Codelco?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si el método de investigación es el vigente\n2.- 50% Si el personal está capacitado \n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 35,
+                "texto": "¿En los Accidentes. la empresa aplica los lineamientos del Procedimiento de Gestión de Incidentes?",
+                "ponderacion": 0.04,
+                "criterio": "1.- 100% Si las investigaciones aplica los lineamientos del  Procedimiento de Gestión de Incidentes\n2.- 80% Si se evidencia entrega y difusión de los lineamientos del procedimiento gestión de incidentes\n3.- 60% Si la gestión ha sido a través de LOD / Libro de Obra / Carta Contractual\n4.- 40% Si la empresa posee un procedimiento propio\n5.- 20%  Si la empresa solicitó el procedimiento de gestión de incidentes\n6.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "F",
+        "titulo": "PROHIBICIONES Y OBLIGACIONES  DE LAS EMPRESAS CONTRATISTAS Y SUBCONTRATISTAS (TITULO IX y X RESSO)",
+        "preguntas": [
+            {
+                "numero": 36,
+                "texto": "¿Cuenta la empresa con un plan de identificación, difusión y control para que sus trabajadores (as) cumplan con las obligaciones indicadas en el Título IX del RESSO?",
+                "ponderacion": 0.01,
+                "criterio": "1.- 100% Si los trabajadores conocen y evidencian recepción del reglamento interno\n2.- 50% Si se cuenta con un plan de identificación, difusión y control\n3.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 37,
+                "texto": "¿Están los reglamentos internos de HyS de la empresa debidamente actualizados y correctamente asociados con las obligaciones indicadas en el Título IX del RESSO?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si el reglamento está asociado a las obligaciones del título IX del RESSO\n2.- 60% Si el reglamento esta actualizado\n3.- 30% Si existen los Reglamentos internos de H y S\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 38,
+                "texto": "¿La empresa difundió a todos sus trabajadores (as) la información acerca de las normas, estándares y procedimientos que le competen en sus labores?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si evidencia difusión a sus trabajadores  \n2.- 50% Si evidencia los documentos mencionados\n3.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "G",
+        "titulo": "Medidas de Prevención Especiales (Título XI RESSO)",
+        "preguntas": [
+            {
+                "numero": 39,
+                "texto": "¿La empresa informa a través del Libro de Obras o Libro de Obra Digital o Cartas Contractuales al Administrador de Contrato Codelco respecto de los trabajos que implican riesgos inherentes altos, indicando los métodos seguros para realizar sus tareas críticas?",
+                "ponderacion": 0.05,
+                "criterio": "1.- 100% Si evidencia los métodos seguros para realizar las tareas críticas  \n2.- 50% Si informa los riesgos inherentes altos a través del LOD / Libro de Obra / Carta Contractual\n3.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "H",
+        "titulo": "ESTANDARES MINIMOS (TITULO XII RESSO)",
+        "preguntas": [
+            {
+                "numero": 40,
+                "texto": "¿Existe registro formal de “Reunión de Inicio”, adecuadamente firmado, donde  acrediten la entrega de los documentos estipulados por las Divisiones de Codelco/VP y en especial el RESSO a la empresa contratista y por extensión a los subcontratistas?",
+                "ponderacion": 0.025,
+                "criterio": "1.- 100% Si incluye la toma de conocimiento del RESSO de la empresa contratista y subcontratistas (si aplica)\n2.- 60% Si evidencia la entrega de los documentos\n3.- 30% Si existe registro formal (firmado) reunión de inicio\n4.- 0% Sin evidencia del punto"
+            },
+            {
+                "numero": 41,
+                "texto": "¿Existe registro formal de “Reunión de Arranque”, adecuadamente firmado, donde acrediten la entrega de los documentos estipulados por las Divisiones de Codelco/VP, incluyendo la declaración de los subcontratos, toma de conocimiento del RESSO, de la empresa contratista y por extensión a los subcontratistas?",
+                "ponderacion": 0.025,
+                "criterio": "Si la empresa contratista tiene subcontratos:\n1.- 100% Si incluye la toma de conocimiento del RESSO de la empresa contratista y subcontratistas\n2.- 80% Si la empresa contratista informa sus subcontratos través del LOD / Libro de Obra / Carta Contractual\n3.- 60% Si evidencia la entrega de los documentos a través del LOD / Libro de Obra / Carta Contractual\n4.- 30% Si existe registro formal (firmado) reunión de arranque\n5.- 0% Sin evidencia del punto\n\nSi la empresa contratista no tiene subcontratos:\n1.- 100% Si incluye la toma de conocimiento del RESSO de la empresa contratista\n2.- 60% Si evidencia la entrega de los documentos a través del LOD / Libro de Obra / Carta Contractual\n3.- 30% Si existe registro formal (firmado) reunión de arranque\n4.- 0% Sin evidencia del punto"
+            }
+        ]
+    },
+    {
+        "letra": "I",
+        "titulo": "Comités Paritarios de Higiene y Seguridad (Título XIII RESSO)",
+        "preguntas": [
+            {
+                "numero": 42,
+                "texto": "¿Se cumple el programa de trabajo de los comités paritarios considerando las actas y los 7 puntos legales descritos en la legislación Art 24 DS N°54 y DS N° 76?",
+                "ponderacion": 0.05,
+                "criterio": "1.- 100% Si cumple con las actividades del programa definido\n2.- 60% Si las actas consideran los puntos legales descrito en art 24 del DS 54\n3.- 50% Si existe un programa de CPHS\n4.- 0% Sin evidencia del punto "
+            }
+        ]
+    },
+    {
+        "letra": "J",
+        "titulo": "ESTADISTICA E INFORMACIÓN (TITULO XIV RESSO)",
+        "preguntas": [
+            {
+                "numero": 43,
+                "texto": "¿La empresa cumple con la exigencia de entregar el informe requerido una vez por mes en la fecha requerida  y  los datos referente al cumplimiento de las actividades  impresas en él son concordante, con la información existente en el área de trabajo? (EJ: Actividades de Liderazgo Preventivo y autoevaluaciones del RESSO, etc.)",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si la información es concordante con lo que se evidencia en terreno\n2.- 60% Si la entrega cumple con los plazos y fechas\n3.- 30% Si entrega informe mensual\n4.- 0% sin evidencia del punto "
+            },
+            {
+                "numero": 44,
+                "texto": "¿La empresa entrega las estadísticas de información de riesgos profesionales en los formatos y plazos requeridos por Codelco?",
+                "ponderacion": 0.03,
+                "criterio": "1.- 100% Entrega de estadísticas en los formatos y plazos requeridos por Codelco\n2.- 50% Entrega de estadísticas sin los formatos y cumpliendo los plazos requeridos por Codelco\n3.- 0% No se evidencia entrega de estadísticas o entrega de estadísticas sin los formatos, ni los pazos requeridos por CODELCO"
+            }
+        ]
+    },
+    {
+        "letra": "K",
+        "titulo": "INFRACCIONES O FALTAS DE LOS CONTRATISTAS y SUBCONTRATISTAS / TRABAJADORES AL RIHS (TITULO XV y XVI)",
+        "preguntas": [
+            {
+                "numero": 45,
+                "texto": "¿Cuenta la empresa con un plan de difusión, capacitación y evaluación para que sus trabajadores, supervisores y línea de mando cumplan y conozcan el proceder ante faltas menores, graves e infracciones de los contratistas o subcontratistas y de los trabajadores (as) indicadas en el Título XV y XVI del RESSO?",
+                "ponderacion": 0.05,
+                "criterio": "1.- 100% Si los trabajadores, supervisores y línea de mando conoce el proceder ante  faltas menores, graves, y las infracciones de los contratistas o subcontratistas\n2.- 50% Se evidencia el plan de difusión, capacitación y evaluación\n3.- 0% Sin evidencia del punto "
+            }
+        ]
+    },
+    {
+        "letra": "L",
+        "titulo": "REQUISITOS DEL ADMINISTRADOR (ADC)",
+        "preguntas": [
+            {
+                "numero": 46,
+                "texto": "¿La empresa cuenta con los requisitos habilitantes, perfil y nombramiento del Administrador de Contrato (ADC)?",
+                "ponderacion": 0.02,
+                "criterio": "1.- 100% Si cuenta con la totalidad de los documentos del ADC\\n2.- 50% Si cuenta de manera parcial\\n3.- 0% Si no cumple o no evidencia."
+            }
+        ]
+    }
+]

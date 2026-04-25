@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m compileall -q .)",
+      "Bash(python -m compileall -q -x \"BACKUPS|Pasado|__pycache__|tmp|scratch\" .)",
+      "Bash(python -c \"import compileall; r = compileall.compile_dir\\('.', quiet=1, rx=__import__\\('re'\\).compile\\(r'BACKUPS|Pasado|__pycache__|tmp|scratch'\\)\\); print\\('OK' if r else 'ERRORS FOUND'\\)\")",
+      "Bash(python -c 'import ast, os, re *)",
+      "Bash(python -m pyflakes .)",
+      "Bash(python -m pip install pyflakes --quiet)",
+      "Bash(python -m pyflakes app.py routes.py)",
+      "Bash(python -m pyflakes config core src vistas intelligence)",
+      "Read(//tmp/**)",
+      "Bash(python -m pyflakes app.py routes.py config core src vistas intelligence)",
+      "Bash(python -c ' *)",
+      "Bash(python tmp/_scan_imports.py)"
+    ]
+  }
+}

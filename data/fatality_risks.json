@@ -1,0 +1,436 @@
+{
+    "RF 01 ENERGÍA ELÉCTRICA": {
+        "Trabajador": [
+            "CCP1: ¿Cuento con mi Licencia Eléctrica vigente y específica para el tipo de intervención y nivel de tensión de las actividades que realizaré?",
+            "CCP2: ¿Cuento con autorización específica para acceder al equipo o instalación eléctrica en la cual desarrollaré mis actividades?",
+            "CCP3: ¿Verifique que las herramientas e instrumentos que debo utilizar se encuentran en buenas condiciones?",
+            "CCP4: ¿He aplicado paso a paso las 5 Reglas de Oro del Electricista, antes de iniciar mi intervención?",
+            "CCM1: ¿Estoy usando el EPP específico (ignífugo/dieléctrico) y en condiciones para la actividad a realizar?",
+            "CCM2: ¿El sistema eléctrico que voy a intervenir cuenta con un sistema de protección adecuado y en buenas condiciones?",
+            "CCM3: ¿Sé cómo actuar ante un accidente eléctrico y conozco los elementos del kit de rescate que debo utilizar?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿Verifiqué que todo el personal a cargo que interviene sistemas eléctricos posee y porta su Licencia Eléctrica vigente y acorde a las actividades que realiza?",
+            "CCP2: ¿Las barreras físicas y sistemas de custodia de equipos e instalaciones eléctricas se encuentran operativos y en buenas condiciones?",
+            "CCP3: ¿Comprobé que todo el personal ha verificado las herramientas e instrumentos de forma previa al inicio de sus actividades y que estos se encuentran en buenas condiciones?",
+            "CCP4: ¿Verifiqué en el lugar de intervención el proceso de aislación, bloqueo, verificación de energía cero y puesta a tierra (si es que aplica)?",
+            "CCM1: ¿He verificado que todo el personal usa el EPP específico, adecuado para el riesgo al cual se ve expuesto en su actividad?",
+            "CCM2: ¿Se han realizado pruebas efectivas, de acuerdo con el estudio de protecciones, para verificar que las protecciones eléctricas están operativas y cuentan con mantenimiento vigente?",
+            "CCM3: ¿Hay kit de rescate eléctrico completo, en condiciones visibles aptas, y personal entrenado en el lugar de trabajo para actuar ante un accidente eléctrico?"
+        ]
+    },
+    "RF 02 TRABAJO EN ALTURA": {
+        "Trabajador": [
+            "CCP1: ¿Está inspeccionada y aprobada (ej. Tarjeta verde), se observa estable y sin defectos evidentes, y me aseguraré de no exceder su capacidad de carga?",
+            "CCP2: ¿Me encuentro acreditado y autorizado para trabajar en altura?",
+            "CCM1: ¿Estoy usando un SPDC completo, ajustado, chequeado, y conectado a un punto de anclaje aprobado por mi supervisor y adecuado a la tarea?",
+            "CCM2: ¿Estoy conectado a un punto de anclaje identificado y validado para detención de caídas?",
+            "CCM3: ¿Sabría qué hacer de forma inmediata, si un compañero o yo quedamos suspendidos en altura?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He confirmado que cada plataforma en uso fue debidamente inspeccionada y aprobada por el trabajador, que presenta estabilidad estructural visible y que se está utilizando sin exceder su capacidad de carga establecida?",
+            "CCP2: ¿Todo el personal en la tarea está acreditado y autorizado, con examen médico vigente y en condiciones físicas y psicológicas aptas para trabajar en altura? ¿He gestionado el permiso para trabajo en altura?",
+            "CCM1: ¿Todos los trabajadores expuestos a caída mayor a 1,8 m están usando el SPDC correctamente, conectado a un punto de anclaje inspeccionado y validado?",
+            "CCM2: ¿Los puntos de anclaje utilizados hoy están certificados, inspeccionados y cumplen con la norma de resistencia?",
+            "CCM3: ¿Está disponible el equipo de rescate y me he coordinado con la brigada local para asegurar respuesta en caso de caída con suspensión?"
+        ]
+    },
+    "RF 03 MANIOBRAS DE IZAJE": {
+        "Trabajador": [
+            "CCP1: ¿he verificado visualmente que el equipo y los elementos de izaje no tienen daños evidentes y he confirmado que su inspección de pre-uso está vigente y aprobada?",
+            "CCP2: ¿He verificado que el equipo está posicionado en terreno firme y nivelado, con todos sus estabilizadores completamente extendidos y apoyados, y que los indicadores de estabilidad del equipo marcan una condición segura?",
+            "CCP3: ¿Cuento con mi acreditación vigente para este equipo (operador) y esta maniobra (rigger), y declaro estar en óptimas condiciones físicas y mentales para realizar el trabajo de forma segura hoy?",
+            "CCP4: ¿he realizado una prueba de comunicación con mi compañero por el canal de radio acordado y he confirmado que ambos entendemos las señales que usaremos?",
+            "CCP5: ¿he participado en la difusión del plan de izaje para esta maniobra específica, entiendo mi rol, los pasos a seguir, los riesgos y las comunicaciones definidas en él?",
+            "CCM1: ¿He verificado que la segregación del área de izaje fue instalada según lo definido en el plan, cubriendo todo el radio de giro y he establecido un control de acceso efectivo para impedir el ingreso de personal no autorizado?",
+            "CCM2: ¿Conozco la ubicación y he realizado la prueba funcional de los sistemas de parada de emergencia de mi equipo, y sé a quién y por qué canal debo llamar para activar el plan de rescate?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que todos los equipos de izaje y aparejos a mi cargo tienen su programa de mantenimiento y certificaciones al día, y que mi personal ha realizado y documentado correctamente las inspecciones de pre-uso antes de iniciar la maniobra?",
+            "CCP2: ¿He verificado que el lugar de emplazamiento del equipo es competente para la maniobra planificada, que la instalación de los estabilizadores se hizo correctamente, y que se han considerado las condiciones del viento antes de autorizar el inicio del izaje?",
+            "CCP3: ¿He verificado que las credenciales de todo el personal involucrado en el izaje están vigentes y corresponden al equipo y carga, y he confirmado visualmente que se encuentran en condiciones adecuadas para la tarea?",
+            "CCP4: ¿He verificado que el equipo de izaje cuenta con un sistema de comunicación funcional, que el operador y el rigger han realizado las pruebas de comunicación, y que existe un protocolo claro sobre cómo actuar si se pierde el contacto?",
+            "CCP5: ¿He verificado que existe un plan de izaje aprobado para esta maniobra, que todo el equipo lo conoce, y que las condiciones reales en terreno (carga, equipo, entorno) coinciden exactamente con lo estipulado en ese plan?",
+            "CCM1: ¿He verificado que el área de la maniobra está completamente delimitada con barreras físicas y señalizada y confirmo que ninguna persona ajena a la tarea está dentro del perímetro de seguridad?",
+            "CCM2: ¿He verificado que los sistemas de parada de emergencia de los equipos están operativos, que el personal sabe cómo activarlos, y que el plan de rescate específico para la maniobra de hoy es conocido por mi equipo y la brigada?"
+        ]
+    },
+    "RF 04 LIBERACIÓN DESCONTROLADA DE ENERGÍAS": {
+        "Trabajador": [
+            "CCP1: ¿He confirmado personalmente la condición de Energía Cero, bloqueando todas las fuentes y controlando las energías residuales (presión, tensión, carga) antes de iniciar la intervención?",
+            "CCP2: ¿He inspeccionado visualmente los componentes críticos (mangueras, cables, seguros, frenos) confirmando que no presentan daños evidentes, fugas o desgaste excesivo antes de operar?",
+            "CCP3: ¿He verificado que los dispositivos de seguridad del equipo (válvulas, limitadores, paradas de emergencia) no están bloqueados, puenteados o con señales visibles de haber sido adulterados?",
+            "CCM1: ¿He verificado que el área de la prueba o de riesgo está completamente delimitada con barreras físicas y señalizada, y confirmo que ninguna persona ajena a la tarea está dentro del perímetro de seguridad?",
+            "CCM2: ¿En caso de una liberación de alta presión, conozco la señal de emergencia que debo activar, sé cómo y a quién dar aviso, y conozco la ruta de evacuación segura?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado en terreno que el equipo ha ejecutado correctamente el bloqueo y el control de energías residuales, asegurando la condición de energía cero antes de autorizar el trabajo?",
+            "CCP2: ¿He verificado que no existen equipos operando con componentes críticos vencidos, con condiciones de rechazo visibles o reparaciones improvisadas en mi área?",
+            "CCP3: ¿He verificado que los equipos críticos bajo mi responsabilidad mantienen sus protecciones de seguridad activas y que no existen modificaciones de parámetros (seteo) sin autorización técnica?",
+            "CCM1: ¿He verificado que la segregación del área de pruebas cubre toda la zona de peligro potencial, que se han establecido controles de acceso efectivos, y que todo el personal conoce la prohibición de ingreso durante la presurización?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia específico para este tipo de eventos, y que los recursos de comunicación y primera respuesta en mi área están operativos y listos para ser usados?"
+        ]
+    },
+    "RF 05 CAÍDA DE ROCAS EN MINA RAJO": {
+        "Trabajador": [
+            "CCP1: ¿Me dieron a conocer el mapa de riesgos geotécnicos actualizado de mi sector, entiendo las recomendaciones y sé cómo actuar antes de ingresar al área?",
+            "CCP2: ¿He realizado la inspección visual de mi área para asegurar que esté libre de riesgos de caída de rocas, o he verificado que el sector fue saneado y liberado antes de iniciar mis labores?",
+            "CCP3: ¿Me aseguré que la altura de la frente de carguío es segura para mi equipo, y verifiqué que no existen afloramientos de agua que puedan generar una caída de material?",
+            "CCM1: ¿Me aseguro antes de trabajar que el sistema de contención de rocas (mallas, pretiles) está bien instalado y sin daños, y que tengo autorización para ingresar más allá de las barreras de segregación?",
+            "CCM2: ¿En caso de un deslizamiento o caída de rocas, sé cómo activar la emergencia y conozco la ruta de evacuación desde mi lugar de trabajo?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿Dispongo del mapa de riesgos geotécnicos actualizado y sus respectivas recomendaciones para las zonas donde se trabajará, y he verificado que mi equipo las conoce y las entiende?",
+            "CCP2: ¿He verificado, ejecutado y registrado el plan de saneamiento y limpieza para mi sector, y he confirmado mediante una inspección visual la recepción conforme del área antes de autorizar el ingreso?",
+            "CCP3: ¿Me aseguro que se está gestionando la altura de las frentes de carguío según las métricas de control topográfico, y mantengo al día la información y el control sobre los afloramientos de agua?",
+            "CCM1: ¿Me aseguro de implementar los sistemas de contención de caídas de rocas según el diseño aprobado, y he verificado que las zonas de riesgo están efectivamente segregadas para las zonas donde se trabajará?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia para deslizamientos, que los sistemas de comunicación están operativos y que todos saben cómo actuar y a quién reportar un evento?"
+        ]
+    },
+    "RF 06 INCENDIO": {
+        "Trabajador": [
+            "CCP1: ¿Conozco el mapa de riesgo de incendio del área?",
+            "CCP2: ¿Tengo el permiso para realizar el trabajo en caliente (soldadura, corte, etc.), he instalado la segregación (biombos, mantas ignífugas), y he confirmado que el área está libre de combustibles y cuento con un extintor operativo?",
+            "CCP3: ¿He verificado que los equipos que opero (eléctricos o mecánicos) no presentan signos de sobrecalentamiento, cables dañados o alarmas activadas, y sé que debo detenerlos y reportar inmediatamente cualquier anomalía?",
+            "CCM1: ¿Conozco la ubicación de los extintores y las alarmas de incendio en mi área de trabajo, y he verificado que se encuentran operativos, sin obstrucciones y con su inspección al día?",
+            "CCM2: ¿En caso de incendio, conozco la alarma, sé cómo dar el aviso de emergencia y conozco la ruta de evacuación y el punto de encuentro seguro desde mi lugar de trabajo?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿El personal a mi cargo, conoce el mapa de riesgo de incendio y he verificado en terreno que todos los materiales inflamables y combustibles en mi área están almacenados en lugares designados y debidamente segregados?",
+            "CCP2: ¿He autorizado el permiso de trabajo en caliente tras revisar la planificación, y he verificado en terreno que las condiciones como la segregación, la limpieza de combustibles y la presencia del vigía de fuego se cumplen tal como fueron establecidas?",
+            "CCP3: ¿He verificado que las protecciones eléctricas de los equipos críticos en mi área están operativas, que se realizan las inspecciones termográficas programadas, y que mi equipo está entrenado para detectar y reportar condiciones de sobrecalentamiento?",
+            "CCM1: ¿He verificado que todos los sistemas de detección y extinción de incendios en mi área (detectores, extintores, redes húmedas) están operativos, inspeccionados, y que mi equipo sabe cómo usarlos correctamente?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia y las rutas de evacuación, y que los sistemas de comunicación para emergencias en mi área están operativos?"
+        ]
+    },
+    "RF 07 SUSTANCIAS PELIGROSAS": {
+        "Trabajador": [
+            "CCP1: ¿He inspeccionado mi área de trabajo buscando señales de fugas, derrames o fuentes de ignición, conozco el significado de las alarmas de gases o rangos de operación de variables operacionales, y sé que debo evacuar y dar aviso inmediato si detecto alguna de estas condiciones?",
+            "CCP2: ¿Conozco los peligros de la sustancia química a la que me expongo, he revisado el procedimiento para su manejo, conozco las restricciones o posibles reacciones y consecuencias de tomar contacto sin la protección adecuada, tengo la HDS a mano y estoy usando los EPP específicos?",
+            "CCP3: ¿Operación: Se mantiene un control permanente de las variables operacionales y sensores de fugas o incendios? Intervención: ¿Identifiqué los puntos de bloqueo, instalé mi bloqueo personal, verifiqué el drenaje completo de la línea y confirmé que el área está segregada antes de intervenir el sistema?",
+            "CCM1: ¿Estoy usando el EPP completo y específico para la sustancia química que manipulo, y conozco la ubicación y el modo de uso de los kits de derrame, las duchas y los lavaojos de emergencia?, ¿Conozco los dispositivos de alerta de fuga, ubicación, limitaciones y tipo de alarma?",
+            "CCM2: ¿En caso de una emergencia química, conozco el tipo de alarma, sé cómo y a quién dar aviso, y conozco la ruta de evacuación y el punto de encuentro seguro?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado en terreno que las instalaciones de almacenamiento, líneas de transporte y puntos de dosificación se encuentran señalizadas y cumplen con los estándares para una operación segura, que los sistemas de detección/control de fugas, gases o incendios están operativos, mantenidos y calibrados?",
+            "CCP2: ¿He verificado que el personal a mi cargo está capacitado y autorizado para la tarea, que cuenta y aplica las disposiciones del procedimiento y la HDS, y he confirmado en terreno que ha realizado las coordinaciones previas y que están usando las herramientas y EPP correctos?",
+            "CCP3: ¿Operación: Verifiqué que se encuentran operativos los dispositivos de control operacional, lazos de control y alarmas asociadas? Intervención: ¿He verificado que el plan de aislación y bloqueo es el correcto, que se han drenado y venteado las líneas, que el área está segregada con barreras físicas y que se ha realizado una verificación de energía cero antes de autorizar el trabajo?",
+            "CCM1: ¿He verificado que mi personal cuenta con el EPP específico para la tarea, que los kits de contención de derrames están completos, y que las duchas y lavaojos del área están inspeccionadas y operativas?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia específico para las sustancias de nuestra área, y que los sistemas de comunicación para activar la respuesta están operativos? ¿He verificado que el personal conoce las vias de evacuación y puntos de encuentro, estos lugares están despejados y señalizados?"
+        ]
+    },
+    "RF 08 TRONADURAS Y EXPLOSIVOS": {
+        "Trabajador": [
+            "CCP1: ¿Se encuentra vigente mi licencia de manipulador de explosivos y mi acreditación en el centro de trabajo?",
+            "CCP2: ¿Antes de cargar el pozo, verifiqué que los parámetros, el tipo de explosivo y los accesorios coinciden con el diseño de tronadura aprobado para hoy?",
+            "CCP3: ¿Antes de cargar, revisé la condición real del terreno (agua, fracturas, pretil, etc.) y sé que, si no coincide con el diseño, debo informar de inmediato a mi supervisor?",
+            "CCP4: ¿Conozco la carta de loro de hoy, el halo de seguridad y estoy ubicado en el punto de evacuación definido?",
+            "CCP5: ¿Antes de operar el vehículo de explosivos, realicé el checklist de preuso e confirmé que frenos, sistema mata chispas, supresión de incendios y otros sistemas críticos están operativos?",
+            "CCM1: ¿Si ocurre una emergencia con explosivos, sé cómo activar la alarma, a quién avisar y cuál es mi punto de encuentro?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que cada integrante de mi equipo (programador, manipuladores) tiene sus acreditaciones y licencias vigentes y que comprenden el plan de tronadura antes de iniciar cualquier manipulación de explosivos?",
+            "CCP2: ¿He verificado que el diseño de tronadura fue ajustado a las condiciones geotécnicas del día, y estoy controlando en terreno que el equipo ejecute el carguío y amarre, sin desviaciones a ese diseño final aprobado?",
+            "CCP3: ¿He verificado que el diseño de tronadura fue ajustado a las condiciones geotécnicas del día, y estoy controlando en terreno que el equipo ejecute el carguío y amarre sin desviaciones a ese diseño final aprobado?",
+            "CCP4: ¿Me aseguré que todo mi equipo conoce y entiende la carta de loros, y he verificado personalmente que todas las barreras de aislación (loros) están instaladas y efectivas antes de confirmar la evacuación completa de mi área?",
+            "CCP5: ¿Antes de asignar un vehículo, he verificado que su acreditación legal está vigente, que su mantenimiento está al día y que el operador ha completado correctamente su inspección de pre-uso?",
+            "CCM1: ¿He verificado que los equipos de primera respuesta de mi área están operativos, y que mi equipo ha practicado y conoce el plan de emergencia específico para un accidente de tronadura?"
+        ]
+    },
+    "RF 09 INTERACCIÓN CON PARTES MÓVILES": {
+        "Trabajador": [
+            "CCP1: ¿He verificado que las guardas y protecciones del equipo con el que interactúo están correctamente instaladas, en buen estado y sin intervenciones? ¿Además, me encuentro trabajando sin elementos que puedan ser atrapados?",
+            "CCP2: ¿Identifiqué todas las fuentes de energía, instalé mi bloqueo personal, verifiqué la ausencia de energía antes de intervenir el equipo?",
+            "CCM1: ¿He identificado la parada de emergencia en mi área de trabajo (botoneras, pull cords, otros) y estos se encuentran visiblemente operativos y sin obstrucciones?",
+            "CCM2: ¿Estoy capacitado en como responder en caso de una emergencia que involucre un atrapamiento con partes móviles?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado en terreno que todas las guardas y protecciones de los equipos presentes en mi área están instaladas y en buen estado?",
+            "CCP2: ¿He verificado que mi equipo de trabajo ha aplicado correctamente el procedimiento de bloqueo para todas las fuentes de energía, y he confirmado la energía cero antes de autorizar la intervención?",
+            "CCM1: ¿He verificado que todos los sistemas de parada de emergencia en mi área están operativos, correctamente señalizados, y que se han realizado las pruebas funcionales programadas para asegurar su confiabilidad?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia para atrapamientos, que los equipos de comunicación y primera respuesta están disponibles, y he coordinado con la brigada de rescate los posibles escenarios en mi área?"
+        ]
+    },
+    "RF 10 VEHÍCULOS": {
+        "Trabajador": [
+            "CCP1: ¿Estoy acreditado para el vehículo que conduzco y me encuentro física y psicológicamente apto para operar de forma segura? (Sin fatiga, somnolencia, medicamento contraindicados, molestias físicas o condiciones que puedan afectar mi desempeño).",
+            "CCP2: ¿Realicé la inspección pre-uso de mi vehículo, verificando operatividad del estado de los frenos, neumáticos, dirección y luces para asegurar que no presentan fallas?",
+            "CCP3: ¿Conozco y respeto el plan de tránsito, los límites de velocidad de la ruta, el tiempo máximo de conducción continua y estoy utilizando correctamente los dispositivos de proximidad y de detección de fatiga?",
+            "CCP4: ¿Conozco el plan de tránsito establecido? ¿Fui informado sobre condiciones de la ruta? ¿Sé que debo verificar el estado de pretiles y bermas durante la conducción y reportar desviaciones en caso de identificarlas?",
+            "CCM1: ¿Conozco el protocolo de emergencia vehicular incluyendo número de contacto, canal de radio, ubicación de puntos de encuentro para ambulancias?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿El personal a mi cargo que conduce vehículos cuenta con su licencia interna vigente, examen médico al día y se encuentra en condiciones físicas y psicológicas aptas para la conducción?",
+            "CCP2: ¿Verifiqué que los vehículos bajo mi responsabilidad tienen su programa de mantenimiento preventivo al día y me aseguro de que los conductores están realizando inspecciones preoperacionales para detectar fallas mecánicas?",
+            "CCP3: ¿Me aseguré de que mi equipo de trabajo conoce las restricciones aplicables por condiciones climáticas? y ¿Estoy monitoreando las alertas de proximidad, velocidad y fatiga para retroalimentar y corregir las desviaciones de mis conductores?",
+            "CCP4: ¿Me aseguré de que mi equipo de trabajo conoce el plan de tránsito? ¿Verifiqué que las rutas se encuentren operativas?",
+            "CCM1: ¿Verifiqué que mi equipo conoce y practica el plan de emergencia vehicular, confirmando disponibilidad de recursos críticos como radios operativas, accesos despejados para ambulancias y kit de primera respuesta en mi área?"
+        ]
+    },
+    "RF 11 ESPACIOS CONFINADOS": {
+        "Trabajador": [
+            "CCP1: ¿Tengo mi permiso de Trabajo firmado y he verificado presencialmente que el Vigía está en la entrada con el sistema de comunicación operativo antes de ingresar?",
+            "CCP2: ¿Conozco los rangos aceptables de la atmósfera para trabajar seguro, he verificado los resultados de la medición inicial, y llevo conmigo un monitor de gases personal que está encendido y operativo?",
+            "CCP3: ¿He verificado que el espacio confinado está señalizado, que todas las energías han sido bloqueadas, y que la ventilación está instalada y funcionando correctamente antes de mi ingreso?",
+            "CCM1: ¿Conozco el plan de rescate para esta tarea, sé cómo activar una emergencia?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He autorizado el permiso de trabajo para el espacio confinado, he verificado que se ha asignado un vigía de uso exclusivo y que el sistema de comunicación bidireccional con el interior está operativo?",
+            "CCP2: ¿He verificado que se realizó la medición inicial de la atmósfera con un equipo calibrado, que los resultados están dentro de los límites seguros, y he asegurado que se mantendrá un monitoreo continuo mientras dure el trabajo?",
+            "CCP3: ¿He verificado que todas las energías y líneas de proceso que afectan al espacio confinado han sido aisladas y bloqueadas, y he confirmado que la ventilación instalada es la adecuada y suficiente para mantener una atmósfera segura?",
+            "CCM1: ¿He verificado que existe un plan de rescate específico para este ingreso, que la brigada o equipo de rescate está alertada y disponible, y que todo el equipamiento de rescate (trípode, huinche, ERA) está inspeccionado y listo para su uso inmediato?"
+        ]
+    },
+    "RF 12 METALES FUNDIDOS": {
+        "Trabajador": [
+            "CCP1: ¿Estoy capacitado para trabajar con metales fundidos y conozco los riesgos y sus controles?",
+            "CCP2: ¿Solicité permiso de ingreso al encargado del área y los operadores de equipos (grúas, hornos) están informados de mi presencia y de la tarea que realizaré en la nave?",
+            "CCP3: ¿He realizado la inspección de pre-uso de mi equipo (puente grúa, locomotora), he verificado que sus sistemas de seguridad están operativos y opero a una velocidad segura y controlada?",
+            "CCP4: ¿Antes de usar cualquier herramienta o añadir material al metal fundido, he verificado visualmente que está completamente seca, y he inspeccionado mi área de trabajo para detectar y reportar cualquier presencia de agua?",
+            "CCM1: ¿Estoy usando el EPP completo y específico para trabajos con metal fundido (traje aluminizado, careta, etc.), y conozco la ubicación de la caseta de refugio más cercana a mi puesto de trabajo?",
+            "CCM2: ¿En caso de un accidente con metal fundido, conozco la alarma, sé cómo dar el aviso de emergencia y conozco la ubicación de la ducha de emergencia o el punto de primera respuesta más cercano?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿Me he asegurado que el personal bajo mi cargo está capacitado y autorizado para realizar tareas con metales fundidos?",
+            "CCP2: ¿Me he asegurado que todo el personal bajo mi cargo conoce el plan de tránsito, ha sido autorizado para ingresar a la nave de fundición y he establecido comunicación radial con los operadores del área?",
+            "CCP3: ¿He verificado que los equipos críticos (puentes grúa, hornos, sistemas de refrigeración) tienen su mantenimiento al día, y que mi equipo está operando de acuerdo a los procedimientos y a las variables de proceso controladas?",
+            "CCP4: ¿Me he asegurado que las condiciones de humedad en la nave son controladas, que los sistemas de drenaje están operativos, y he verificado que todo material o herramienta que entrará en contacto con metal fundido está seco?",
+            "CCM1: ¿He verificado que mi personal cuenta con el EPP específico para esta tarea, que está en buen estado, y que las casetas de protección y cabinas de equipos en mi área mantienen su integridad estructural?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia específico para quemaduras térmicas, y que los recursos de comunicación y primera respuesta están operativos y listos para ser usados?"
+        ]
+    },
+    "RF 13 CAÍDA DE OBJETOS": {
+        "Trabajador": [
+            "CCP1: ¿He verificado que la estructura donde trabajaré está en buenas condiciones, sin vibración excesiva, y que los materiales apilados están estables y asegurados?",
+            "CCP2: ¿He verificado que tengo la autorización para el trabajo, que no hay otras personas trabajando directamente debajo de mí, y que todas mis herramientas están debidamente amarradas antes de subir?",
+            "CCM1: ¿He verificado que el nivel inferior a mi área de trabajo está señalizado y segregado con barreras duras, y que la plataforma donde trabajo cuenta con sus rodapiés en buen estado?",
+            "CCM2: ¿En caso de un accidente por caída de un objeto, sé cómo y a quién dar el aviso de emergencia de forma inmediata y conozco las acciones de primeros auxilios que puedo aplicar sin ponerme en riesgo?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado la integridad estructural del área de trabajo, me he asegurado que los materiales están acopiados de forma segura, y he evaluado las condiciones climáticas y de vibración antes de autorizar la tarea?",
+            "CCP2: ¿He planificado y autorizado el trabajo en la vertical, he verificado que el personal cuenta con los sistemas de amarre de herramientas, y he asegurado la coordinación y segregación para evitar la exposición de personas en niveles inferiores?",
+            "CCM1: ¿Verifiqué la correcta segregación con barreras duras de los niveles inferiores y el uso de elementos de contención adecuados, y he confirmado que el personal conoce y respeta la delimitación del área?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia para este tipo de accidentes, que los sistemas de comunicación están operativos y que los equipos de primera respuesta están disponibles y en buen estado?"
+        ]
+    },
+    "RF 14 OPERACIÓN FERROVIARIA": {
+        "Trabajador": [
+            "CCP1: ¿Operador: Cuento con mi credencial interna para operar? Mantenedores: ¿Me encuentro autorizado y capacitado para realizar trabajos en la vía?",
+            "CCP2: ¿Antes de mover el equipo, he realizado la inspección pre-operacional y verificado personalmente que los sistemas críticos como frenos, luces y comunicaciones están funcionando correctamente?",
+            "CCP3: ¿Antes de intervenir la vía, hemos coordinado las autorizaciones y operaciones con el despachador para realizar la tarea, además de haber instalado a nuestro loro vivo con sus elementos de alerta (silbato, bandera)?",
+            "CCM1: ¿Sé cómo activar la alarma de emergencia (canal de radio, número), qué información clave debo entregar y cuál es mi rol específico en caso de un accidente ferroviario en mi área?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que cada integrante de mi cuadrilla se encuentra autorizado y capacitado, antes de asignarles cualquier trabajo en la operación ferroviaria?",
+            "CCP2: ¿He verificado que los equipos y el sector de la vía donde operará mi personal hoy han pasado sus inspecciones y mantenimientos programados, y que no existen condiciones subestándar reportadas?",
+            "CCP3: ¿He verificado que la cuadrilla realizó la coordinación con la Sala de Control, que tiene sus elementos de resguardo (loro, baliza, radio) operativos, y que solo intervendrán el sector autorizado?",
+            "CCM1: ¿He verificado que los equipos de primera respuesta de mi área (camilla, botiquín) están operativos y que mi equipo ha practicado y conoce el plan de emergencia para un atropello o colisión?"
+        ]
+    },
+    "RF 15 AVALANCHA Y ALUDES": {
+        "Trabajador": [
+            "CCP1: Antes de ingresar a esta zona, ¿he verificado en el mapa de riesgos el nivel de peligro de avalancha, he confirmado el estado del sistema de alerta y he recibido la autorización de mi supervisor para entrar?",
+            "CCP2: Antes de iniciar mi trabajo, ¿he consultado el boletín de riesgos de hoy y entiendo cuál es el nivel de peligro de avalancha y las restricciones que aplican a mi área?",
+            "CCP3: Antes de operar un sistema de control de avalanchas (ej. torre de disparo), ¿he verificado que el área de impacto está completamente evacuada y he seguido el protocolo de seguridad paso a paso?",
+            "CCM1: ¿Porto mi equipo de protección personal invernal, incluyendo mi detector de víctimas (ARVA) encendido en modo emisión, y sé cómo usarlo en modo búsqueda?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que las barreras físicas y la señalización de advertencia de avalancha en mi sector están instaladas y efectivas, y he comunicado a mi equipo el estado actual de las alertas y las rutas seguras?",
+            "CCP2: ¿He verificado el último reporte de estabilidad del manto de nieve y confirmado que las condiciones actuales permiten una operación segura, antes de autorizar las tareas de mi equipo en áreas expuestas?",
+            "CCP3: ¿He verificado que los sistemas de control (torres, terrazas, muros) en mi sector han pasado sus mantenimientos, y que cualquier operación de desencadenamiento artificial sigue estrictamente el procedimiento de seguridad?",
+            "CCM1: ¿He verificado que todo mi personal cuenta con su EPP invernal completo y operativo (incluyendo ARVA), y que conocen el plan de actuación en caso de ser sorprendidos por una avalancha?"
+        ]
+    },
+    "RF 16 VACIADOS, CHIMENEAS, PIQUES": {
+        "Trabajador": [
+            "CCP1: ¿He verificado que los accesos al pique o chimenea están segregados y señalizados, que el bloqueo de energías está instalado, que la atmósfera ha sido medida y es segura, y que la iluminación es suficiente para trabajar?",
+            "CCP2: Antes de ingresar, ¿he inspeccionado el pique o chimenea, verificando que no presenta daños visibles en su fortificación, y que su acceso está correctamente habilitado?",
+            "CCM1: ¿He inspeccionado mi sistema personal de detención de caídas (arnés, colas de seguridad), he verificado que los puntos de anclaje y líneas de vida están en buen estado, y me mantengo anclado el 100% del tiempo?",
+            "CCM2: En caso de una emergencia en el pique o chimenea, ¿conozco el plan de rescate, sé cómo activar la alarma y conozco mi rol específico durante la emergencia?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que se han bloqueado todas las energías, se ha monitoreado la atmósfera, se ha instalado la segregación y la iluminación, y he autorizado formalmente el ingreso seguro del personal a piques o chimeneas?",
+            "CCP2: ¿He verificado que el diseño y la fortificación de piques y chimeneas en mi área cumplen con las recomendaciones geomecánicas, y he confirmado que todas las labores abandonadas están identificadas y selladas con tapados herméticos?",
+            "CCM1: ¿Me he asegurado que mis trabajadores cuentan con el SPDC adecuado y en buen estado, y he verificado que los puntos de anclaje y las líneas de vida en el área cumplen con el estándar y son utilizados correctamente por el personal?",
+            "CCM2: ¿He verificado que existe un plan de rescate específico para este trabajo, que la brigada está alertada y disponible, y que todo el equipamiento de rescate vertical (trípode, huinche, ERA) está inspeccionado y listo para su uso inmediato?"
+        ]
+    },
+    "RF 18 PLANCHONEO": {
+        "Trabajador": [
+            "CCP1: ¿Conozco las señales de alerta de inestabilidad (grietas nuevas, desprendimientos menores, ruidos, mallas cargadas) y sé cómo reportarlas inmediatamente a mi supervisor antes de continuar con la tarea?",
+            "CCP2: ¿He verificado que la labor está habilitada para reingreso después de la tronadura, sin reporte de tiros quedados o inestabilidad evidente?",
+            "CCM1: Antes de ingresar a una labor, ¿he verificado que tengo la autorización para hacerlo y he comprobado que no existen barreras físicas o señalizaciones que prohíban el paso?",
+            "CCM2: ¿Estoy operando el equipo desde una ubicación físicamente segura y autorizada, ya sea una sala de control o una estocada protegida y fortificada y he verificado que todos los sistemas de control y comunicación con el equipo funcionan correctamente?",
+            "CCM3: En caso de una emergencia por caída de roca, ¿conozco el canal de emergencia que debo activar y la ubicación de la ruta de evacuación o refugio más cercano desde mi lugar de trabajo?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado en terreno que la acuñadura está realizada y que la fortificación instalada (tipo de perno, malla, shotcrete) corresponde a lo que exige el diseño geotécnico para esta labor?",
+            "CCP2: ¿Confirmé que la P&T se ejecutó según diseño, el área fue despejada y la labor está inspeccionada y liberada para reingreso?",
+            "CCM1: ¿He verificado que todas las zonas de riesgo bajo mi responsabilidad están correctamente señalizadas y segregadas con barreras físicas, y que se está aplicando un control estricto para autorizar el ingreso solo a personal esencial?",
+            "CCM2: ¿He verificado que en las zonas definidas como de alto riesgo solo se están utilizando equipos en modo remoto, que los operadores están acreditados, y que los protocolos de ingreso restringido a estas áreas se cumplen rigurosamente?",
+            "CCM3: ¿He verificado que mi equipo conoce el plan de emergencia y que los recursos de comunicación y rescate en mi área (radios, refugios, camillas) están operativos y listos para ser usados inmediatamente?"
+        ]
+    },
+    "RF 20 SÍLICE": {
+        "Trabajador": [
+            "CCP1: ¿Me informaron del Nivel de riesgo por exposición a sílice del área a intervenir?, ¿Conozco las fuentes de polvo críticas del área a intervenir y los sistemas de control?",
+            "CCP2: ¿Los equipos productivos del área de trabajo funcionan sin fugas o derrames evidentes?, de no ser así, ¿Informe a mi supervisión la condición?",
+            "CCM1: ¿Verifiqué que la ventilación y/o presurización, según aplique en mi área, están activas y operativas antes de realizar la tarea?",
+            "CCM2: ¿Utilizo exclusivamente equipos de aseo industrial no contaminantes (alto vacío, limpieza húmeda) para evitar dispersión de polvo?",
+            "CCM3: ¿Estoy usando el respirador certificado asignado, con prueba de ajuste vigente, sin interferencias su sello con mi rostro y en buen estado?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿Conozco el nivel de riesgo por exposición a sílice del área, las fuentes críticas y controles existentes? ¿Verifiqué que los sistemas de control de polvo estén operativos? ¿Informé a los trabajadores?",
+            "CCP2: ¿Constaté que la operación de los equipos productivos no sobrepasa la capacidad de retención de polvo de los equipos y que no se producen fugas por falta de componentes o mala condición o desajuste de éstos?, ¿Gestioné las desviaciones?",
+            "CCM1: ¿Constaté que se cumplen los caudales mínimos de ventilación y/o la presurización positiva en cabinas, salas u otras instalaciones habitadas, según aplique, gestionando desviaciones de inmediato?",
+            "CCM2: ¿Constaté que las áreas críticas se limpian solo con técnicas autorizadas (alto vacío, limpieza húmeda) y nunca con aire comprimido o barrido o paleo en seco?",
+            "CCM3: ¿Constaté que las personas expuestas usan el EPR requerido según la matriz de selección, tienen pruebas de ajuste vigentes y gestioné oportunamente los recambios necesarios?"
+        ]
+    },
+    "RF 21 ARSÉNICO": {
+        "Trabajador": [
+            "CCP1: Antes de iniciar mi tarea, ¿Conozco las fuentes de arsénico de mi área de trabajo y entiendo que puedo ingresar a las zonas donde se encuentran, solo si estoy autorizado?",
+            "CCP2: ¿He verificado que los sistemas de captura de polvo, humos, gases y borras arsenicales del área de trabajo están operativos y he reportado cualquier anomalía o fuga de inmediato?",
+            "CCP3: ¿Estoy utilizando la técnica de aseo definida para este material (húmedo o aspiración) y mi equipo de limpieza (ej. camión alto vacío, aspiradora, hidrolavadora) está en buenas condiciones y con su mantenimiento al día?, ¿Me encuentro capacitado para el manejo seguro de materiales arsenicales?",
+            "CCM1: ¿Estoy usando correctamente todo mi EPP específico para arsénico (respirador, buzo, guantes), he realizado mi prueba de ajuste del respirador y sigo las normas higiénico sanitarias como no ingerir alimentos ni líquidos en áreas con riesgo de exposición?",
+            "CCM2: ¿Estoy al día con mis exámenes de vigilancia médica para el arsénico (examen de orina) y he sido informado de mis resultados?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado en terreno que todas las fuentes de arsénico en mi sector se encuentran en áreas segregadas, señalizadas y restringidas, y que mi equipo conoce y respeta estas zonas de control?",
+            "CCP2: ¿He confirmado que todos los sistemas de control de emisiones en mi área están operativos según diseño y que los planes de mantenimiento preventivo se están cumpliendo para asegurar su eficiencia?",
+            "CCP3: ¿He verificado que se está ejecutando el programa de aseo industrial en mi área y que el personal utiliza las técnicas y equipos correctos para evitar la dispersión de polvo con arsénico?, ¿Todo mi personal se encuentra capacitado para prevenir el ingreso de arsénico a su organismo?",
+            "CCM1: ¿He verificado que todo mi personal expuesto cuenta con su EPP específico, lo usa correctamente, y que las instalaciones de soporte como las casas de cambio y salas de hidratación están limpias y operativas?",
+            "CCM2: ¿He verificado que todo el personal expuesto en mi equipo está incluido y al día en el programa de vigilancia ambiental y de salud, y he gestionado los casos con resultados alterados según el procedimiento?"
+        ]
+    },
+    "RF 23 COLAPSO ESTRUCTURAL DEL MACIZO ROCOSO": {
+        "Trabajador": [
+            "CCP1: ¿Conozco las alertas del sistema de monitoreo en mi sector (balizas, alarmas) y sé que debo evacuar inmediatamente a una zona segura si se activan?",
+            "CCP2: ¿He inspeccionado mi lugar de trabajo buscando señales de inestabilidad como: grietas o, deformaciones, ruidos en el macizo (crepitaciones), mallas cargadas o pernos sueltos y sé que debo reportarlas de inmediato antes de continuar?",
+            "CCP3: Antes de ingresar, ¿he verificado que la labor se encuentra liberada y autorizada para el tránsito después de la tronadura, y que no existen advertencias de condiciones post-disparo anormales como tiros quedados o inestabilidades de la labor?",
+            "CCM1: ¿Tengo autorización para ingresar a esta labor, y he chequeado visualmente que los accesos no están bloqueados y que las estructuras de contención no presentan daños evidentes?",
+            "CCM2: ¿Estoy operando el equipo desde una ubicación físicamente segura y autorizada -ya sea una sala de control o una estocada protegida y fortificada- y he verificado que todos los sistemas de control y comunicación con el equipo funcionan correctamente?",
+            "CCM3: En caso de un colapso o derrumbe, ¿conozco la señal de emergencia que debo activar y la ubicación de la ruta de evacuación o refugio más cercano desde mi lugar de trabajo?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que los instrumentos de monitoreo en mi área están operativos y que mi equipo cumple el plan de producción (cartir) sin desviaciones que puedan acelerar la deformación del macizo rocoso?",
+            "CCP2: ¿He verificado en terreno que la fortificación instalada (tipo, espaciamiento, calidad) corresponde a lo que exige el diseño geotécnico para esta labor, y que se han ejecutado los controles de calidad requeridos?",
+            "CCP3: ¿He verificado en terreno que los diseños de perforación y tronadura se están implementando según lo especificado (longitudes, ángulos, secuencia, explosivos), he gestionado y comunicado formalmente cualquier desviación, y he confirmado el aislamiento y evacuación del área antes de autorizar la tronadura?",
+            "CCM1: ¿He verificado que las estructuras de contención están instaladas conforme al diseño y a las recomendaciones geomecánicas, y que todas las labores que presentan riesgo de colapso están efectivamente segregadas?",
+            "CCM2: ¿He verificado que en las zonas definidas como de alto riesgo solo se están utilizando equipos en modo remoto, que los operadores están acreditados, y que los protocolos de ingreso restringido a estas áreas se cumplen rigurosamente?",
+            "CCM3: ¿Se dispone de un plan integrado de emergencia, brigada entrenada y refugios/equipos operativos para responder a un colapso estructural?"
+        ]
+    },
+    "RF 24 TALUDES": {
+        "Trabajador": [
+            "CCP1: ¿Conozco el mapa de riesgo geotécnico de mi sector y las alertas de los sistemas de monitoreo (radares), y sé que debo evacuar inmediatamente a una zona segura si se activan?",
+            "CCP2: ¿He confirmado que el diagrama de disparo y la carta de tronadura que voy a ejecutar corresponden a un diseño de control de pared y he verificado que no hay condiciones anormales en el banco o personal en la zona de riesgo?",
+            "CCP3: Antes de iniciar mis labores, ¿he verificado que el área fue saneada y estabilizada, y que tengo la autorización para ingresar?",
+            "CCM1: ¿He verificado que los pretiles de seguridad no están dañados o sobrepasados, y que tengo autorización para ingresar más allá de las barreras de segregación?",
+            "CCM2: En caso de un deslizamiento o caída de rocas, ¿conozco la señal de alarma, sé cómo dar el aviso de emergencia y conozco la ruta de evacuación desde mi lugar de trabajo?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que los radares de monitoreo en mi área están operativos y sin alarmas, que se cumple el diseño de talud, y que mi equipo conoce los riesgos geotécnicos específicos del sector?",
+            "CCP2: ¿He verificado en terreno que el diseño de tronadura de control de pared se está implementando según lo especificado, he confirmado el aislamiento del área, y he revisado los resultados post-evento para asegurar la integridad del talud?",
+            "CCP3: ¿He verificado que el saneamiento y la estabilización del talud se implementaron según el diseño aprobado, y he firmado el protocolo de recepción conforme del área?",
+            "CCM1: ¿Cuento con las recomendaciones geotécnicas para mi sector, y he verificado en terreno que los pretiles y barreras están construidos según diseño y las zonas de riesgo efectivamente segregadas?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia para deslizamientos, que los sistemas de comunicación están operativos y que todos saben cómo actuar y a quién reportar un evento?"
+        ]
+    },
+    "RF 25 EQUIPOS MINEROS E INDUSTRIALES": {
+        "Trabajador": [
+            "CCP1: ¿Estoy acreditado, autorizado y me encuentro física y psicológicamente apto para operar el equipo? (sin lesiones, malestares ni condiciones que puedan afectar mi desempeño)",
+            "CCP2: ¿Están operativos los sistemas del equipo que controlan velocidad, comunicación operacional, fatiga, somnolencia y alertas de proximidad?",
+            "CCP3: ¿Verifiqué que los componentes mecánicos, hidráulicos y eléctricos del equipo estén en condiciones normales y sin fallas visibles antes de operar?",
+            "CCP4: ¿Se identifica que las condiciones viales son seguras (bermas, pretiles, señalización, humectación, peraltes, angostamiento en caminos o rampas, altura de banco) y tengo claro que debo reportarlas una vez advertidas si no es así?",
+            "CCM1: ¿La cabina del equipo que operaré hoy tiene estructura ROPS y FOPS en buen estado, sin daños ni intervenciones visibles?",
+            "CCM2: ¿Sé cómo actuar de inmediato si ocurre un choque, volcamiento, colisión o incendio del equipo que estoy operando?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿Todo el personal que opera equipos mineros está acreditado, con examen médico vigente y en condiciones físicas y psicológicas aptas? (Preguntar directamente a los trabajadores si se sienten en buenas condiciones para la tarea.)",
+            "CCP2: ¿Todos los equipos asignados tienen habilitados los sistemas que controlan: velocidad, comunicación operacional, fatiga, somnolencia y alerta de proximidad?",
+            "CCP3: ¿Fueron verificados hoy, los sistemas críticos de los equipos? tales como: revisión de frenos, dirección, neumáticos, sistemas hidráulicos y eléctricos",
+            "CCP4: ¿He verificado que la infraestructura vial operativa esté conforme a diseño y libre de condiciones que afecten la conducción segura?",
+            "CCM1: ¿Todos los equipos en operación cuentan con certificación vigente y verificación visual de estructuras ROPS y FOPS sin modificaciones?",
+            "CCM2: ¿Existe un equipo de emergencia disponible en el área de trabajo y personal entrenado para intervenir ante un siniestro como, colisión, volcamiento o incendio?"
+        ]
+    },
+    "RF 26 EQUIPOS AUTÓNOMOS": {
+        "Trabajador": [
+            "CCP1: ¿He verificado en mi equipo que la señal GPS y el sistema ODS están operativos, y confirmo visualmente que los sensores están limpios y sin obstrucciones antes de iniciar la marcha?",
+            "CCP2: ¿He verificado el estado de los sistemas críticos (frenos, dirección, neumáticos) y de los sistemas tecnológicos?",
+            "CCP3: ¿Tengo la competencia y autorización para esta tarea, y he verificado con la sala de control el estado del equipo autónomo, asegurando que el sistema reconoce mi presencia en esta zona antes de ingresar?",
+            "CCP4: ¿Tengo la autorización para ingresar a esta zona, he verificado que las barreras de acceso están operativas, y confirmo visualmente que la ruta y los pretiles están en buenas condiciones?",
+            "CCM1: ¿Conozco la ubicación de la parada de emergencia más cercana, sé cómo activarla, y entiendo el protocolo de comunicación y evacuación si se produce una emergencia ahora?"
+        ],
+        "Supervisor": [
+            "CCP1: Antes de autorizar la operación de la flota, ¿me he asegurado de que el sistema de monitoreo no reporta fallas de conectividad GPS o del ODS en ninguna zona de la ruta asignada?",
+            "CCP2: Antes de iniciar el turno, ¿me he asegurado de que todos los equipos autónomos tienen su plan de mantenimiento al día en SAP y que no existe ningún reporte de falla crítica pendiente de atención?",
+            "CCP3: Antes de autorizar las tareas del turno, ¿me he asegurado de que cada persona bajo mi responsabilidad que interactuará con la zona autónoma tiene las competencias para la función específica que va a ejecutar?",
+            "CCP4: Antes de iniciar las operaciones, ¿me he asegurado de que las rutas, bermas, pretiles y barreras físicas de control de acceso han sido inspeccionadas y se encuentran en condiciones operativas seguras?",
+            "CCM1: Antes de iniciar el turno, ¿me he asegurado de que los equipos de emergencia (vehículos, equipos de rescate) están operativos y que el personal de la brigada y policlínico están preparados (capacitación, recursos, otros) para atender la emergencia?"
+        ]
+    },
+    "RF 27 ATROPELLO": {
+        "Trabajador": [
+            "CCP1: ¿Conozco el plan de tránsito del área?, ¿existen restricciones en la vía o en el área de trabajo? (zonas segregadas y sus respectivos controles de acceso)",
+            "CCP2: ¿Está activado el sistema anti atropello en el equipo cuando corresponda? (Verificar: que emita alertas correctamente, sin bypass, y a los que le aplique TAG asignado funcionen en conjunto con el sistema)",
+            "CCP3: ¿Mi ropa de alta visibilidad se encuentra en buenas condiciones (fluorescencia y reflectancia), y los vehículos/equipos del área cuentan con elementos visibles (baliza, señalización y pértiga)?",
+            "CCP4: ¿Sé que siempre debo comunicar por radio mi posición y recibir la confirmación del conductor antes de avanzar por una zona en donde exista interacción con equipos y vehículos?",
+            "CCM1: ¿Sé cómo activar la alarma de emergencia (canal de radio, número), qué información clave debo entregar (quién soy, dónde estoy, qué pasó), y conozco la ubicación de los puntos de encuentro de ambulancia (PEA)?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿Verifiqué que el área de trabajo cuenta con segregaciones adecuadas, señalética y elementos de infraestructura vial y peatonal en condiciones visibles y operativas?",
+            "CCP2: ¿Verifiqué que los equipos y vehículos en mi área cuenten con sistema antiatropello operativo, sin fallas visibles ni bypass, cobertura activa en zonas de riesgo y con TAG funcionales (a los que aplique)?",
+            "CCP3: ¿He verificado que el personal, vehículos y equipos cuenten con todos los elementos de alta visibilidad (ropa, señalética, baliza, pértiga) y estos se encuentran en condiciones operativas visibles y sin daño?",
+            "CCP4: ¿He verificado que el equipo de personas bajo mi responsabilidad, cuentan con los elementos de comunicación bidireccional operativos en terreno?",
+            "CCM1: ¿He verificado que los equipos de primera respuesta en mi área están operativos, y que mi equipo ha practicado y conoce el plan de emergencia específico para un accidente de interacción?"
+        ]
+    },
+    "RF 28 CAVING": {
+        "Trabajador": [
+            "CCP1: ¿Conozco las alertas de inestabilidad del caving en mi sector (sísmicas, visuales) y sé que debo evacuar inmediatamente a una zona segura si se activan?",
+            "CCP2: ¿He verificado que tengo la autorización para ingresar a esta labor y que los trabajos de debilitamiento (fracturamiento) requeridos para el sector ya fueron ejecutados y aprobados?",
+            "CCP3: Antes de ingresar, ¿he verificado que la labor se encuentra liberada y autorizada para el tránsito después de la tronadura, y que no existen advertencias de condiciones post-disparo anormales como tiros quedados o inestabilidad del terreno?",
+            "CCM1: Antes de ingresar a una labor, ¿he verificado el mapa de riesgo actualizado del sector y he comprobado que no existen barreras o señalizaciones que prohíban el paso por peligro de colgadura o riesgo de airblast?",
+            "CCM2: En caso de un evento de airblast, ¿conozco la señal de emergencia, sé que debo dirigirme inmediatamente al refugio minero más cercano y conozco su ubicación?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que los instrumentos de monitoreo geomecánico están operativos, que mi equipo cumple el plan de extracción (cartir) sin desviaciones, y que conozco el estado actual del crecimiento de la cavidad y la altura del airgap?",
+            "CCP2: ¿He confirmado que el plan de debilitamiento para el área se ejecutó conforme al diseño y secuencia, y he verificado los resultados (sismicidad, monitoreo) antes de autorizar la incorporación del sector al hundimiento?",
+            "CCP3: ¿Confirmé que la P&T se ejecutó según diseño, el área fue despejada y la labor está inspeccionada y liberada para reingreso, verificando que no hay daño estructural en los puntos de extracción?",
+            "CCM1: ¿He verificado que todas las zonas con riesgo de airblast bajo mi responsabilidad están correctamente señalizadas y segregadas con barreras duras, y que se está aplicando un control estricto para autorizar cualquier ingreso?",
+            "CCM2: ¿He verificado que mi equipo conoce el plan de emergencia específico para airblast, que los refugios en mi sector están operativos, y que los sistemas de comunicación para emergencias funcionan correctamente?"
+        ]
+    },
+    "RF 29 CAÍDA A CUERPOS LÍQUIDOS": {
+        "Trabajador": [
+            "CCP1: Antes de ingresar al área, ¿he verificado que existe un cierre perimetral completo, he identificado la señalética de riesgo de inmersión y he recibido la autorización formal para mi ingreso?",
+            "CCP2: ¿Cuento con la capacitación y autorización para esta tarea, porto mi chaleco salvavidas (o arnés en el borde)?",
+            "CCP3: Antes de usar esta plataforma (o balsa), ¿he verificado visualmente que su estructura y barandas están en buen estado, y he realizado una prueba de comunicación para asegurar que mi radio funciona?",
+            "CCM1: ¿He identificado la ubicación del equipo de rescate más cercano (flotador, cuerda) y conozco el procedimiento para dar la alarma de hombre al agua?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que los cierres perimetrales y señalética en mi sector están completos y en buen estado, y que solo el personal autorizado ingresa al área de acuerdo con el protocolo de acceso?",
+            "CCP2: ¿He verificado que todo mi personal asignado a la tarea está autorizado y capacitado en el uso del sistema de protección contra caídas o flotación personal requerido y que lo está utilizando?",
+            "CCP3: ¿He verificado que la infraestructura y los equipos (balsas, botes) de mi área tienen su plan de mantenimiento al día, y he confirmado que los sistemas de comunicación son operativos antes de iniciar las tareas?",
+            "CCM1: ¿He verificado que el equipamiento de rescate en mi área está completo, operativo y en su lugar designado, y que mi equipo ha practicado el plan de emergencia y rescate?"
+        ]
+    },
+    "RF 30 TIRO Y ARRASTRE": {
+        "Trabajador": [
+            "CCP1: Antes de usar este elemento de tiro (eslinga, tecle u otro), ¿he realizado la inspección pre-uso y verificado personalmente que no tiene daños como cortes, deformaciones o desgaste excesivo que impidan su uso seguro?",
+            "CCP2: Antes de iniciar la maniobra, ¿he verificado que los dispositivos de seguridad de mi equipo, como el limitador de carga o la parada de emergencia, están operativos y no han sido intervenidos?",
+            "CCP3: ¿He verificado que los accesorios que voy a usar (grilletes, eslingas) son los especificados en el plan, que su capacidad es la correcta para la carga y que el área de maniobra está segregada para mantener a todos fuera de la línea de fuego?",
+            "CCM1: ¿He verificado que las barreras de contención o sombras de protección están correctamente instaladas entre mi ubicación y la maniobra de tiro y arrastre, según lo indica el procedimiento?",
+            "CCM2: ¿Sé cómo activar la alarma de emergencia, cuál es mi rol en el plan de respuesta y dónde se ubican los equipos de primeros auxilios?"
+        ],
+        "Supervisor": [
+            "CCP1: ¿He verificado que todos los equipos y accesorios de tiro y arrastre para la tarea de hoy tienen su programa de mantenimiento al día, y que mi personal ha realizado y registrado la inspección pre-uso de cada componente?",
+            "CCP2: ¿He confirmado que los equipos a utilizar en la maniobra de hoy cuentan con sus dispositivos de seguridad funcionando correctamente y que el personal sabe cómo operarlos en caso de ser necesario?",
+            "CCP3: ¿He confirmado que se seleccionaron los accesorios de tiro correctos y certificados para la tarea de hoy, y he verificado en terreno que el área está correctamente delimitada y todo el personal se mantiene fuera de la línea de fuego?",
+            "CCM1: ¿He verificado en terreno que las barreras de contención de energía están instaladas según el diseño y que son adecuadas para la energía potencial que podrían tener que contener en caso de una falla?",
+            "CCM2: ¿He verificado que los equipos de primera respuesta de mi área están operativos y que mi equipo ha practicado y conoce el plan de emergencia para este tipo de accidentes?"
+        ]
+    }
+}

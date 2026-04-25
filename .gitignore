@@ -1,0 +1,57 @@
+# ── Bases de Datos (NUNCA subir — datos de clientes) ────────────────
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# ── Datos y Backups (pueden contener información sensible) ───────────
+CGT_DATA/
+BACKUPS/
+Pasado/
+scratch/
+tmp/
+
+# ── Secretos y Variables de Entorno ─────────────────────────────────
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# ── Archivos generados / caché Python ───────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Entornos virtuales ───────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── IDEs y editores ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Archivos grandes de soporte (documentos, PDFs, logos de clientes)
+Material de Soporte/
+Material para revisión/
+CVisual actualizaciones/
+Documentacion_Soporte/
+assets/logos_clientes/
+assets/backgrounds/
+
+# ── Scripts de ejecución local (Windows) ────────────────────────────
+*.bat
+*.vbs
+
+# ── Archivos de configuración temporal ───────────────────────────────
+*.toml.py
+tmp/_scan_imports.py
