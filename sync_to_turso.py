@@ -9,9 +9,33 @@ import os
 sys.path.insert(0, os.path.dirname(__file__))
 os.chdir(os.path.dirname(__file__))
 
-os.environ["LIBSQL_DB_URL"] = "libsql://cgt-saas-prod-torreblanka-create.aws-us-east-1.turso.io"
-os.environ["LIBSQL_DB_AUTH_TOKEN"] = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJleHAiOjE3NzcxODA1MDEsImlhdCI6MTc3NzA5NDEwMSwiaWQiOiIwMTlkYzI4Mi1hNDAxLTc1ZGQtYjhkNS01NTkxZTFjN2Y0ZTMiLCJyaWQiOiI1ZjYwZDM1NS1kMDVjLTRhM2MtYjA1Ny1iYjFkODAwODdjYTMifQ.FR7iUu2Oa54Oh9IjstVsl6tBJUWBvKCmlzvu6eIZtl-dYDDRPCeGd1L8t_zPVSRBN1r_cKvdGA8B0EhI-8NcDg"
-os.environ["TURSO_ENV"] = "sync"
+# ⚠️ ATENCIÓN: Las credenciales deben estar en variables de entorno, NO hardcodeadas.
+# 
+# Antes de ejecutar, asegúrate de tener estas variables definidas:
+#   set LIBSQL_DB_URL=libsql://cgt-saas-prod-tu-org.turso.io
+#   set LIBSQL_DB_AUTH_TOKEN=eyJ...
+#
+# O crea un archivo .env con:
+#   LIBSQL_DB_URL=libsql://cgt-saas-prod-tu-org.turso.io
+#   LIBSQL_DB_AUTH_TOKEN=eyJ...
+#
+# El token actual caduca: 2026-04-24 (exp:1777180501)
+# Si caduca, genera uno nuevo en: https://console.turso.io
+
+# Cargar .env local si existe (opcional, no crítico)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # python-dotenv no instalado, confiar en vars de entorno del sistema
+
+# Si no hay variables de entorno, forzar sincronización local
+if not os.getenv("LIBSQL_DB_URL") or not os.getenv("LIBSQL_DB_AUTH_TOKEN"):
+    print("[WARN] LIBSQL_DB_URL o LIBSQL_DB_AUTH_TOKEN no están definidos.")
+    print("[WARN] Usando modo 'local' (sin sincronización Turso).")
+    os.environ['TURSO_ENV'] = 'local'
+else:
+    os.environ['TURSO_ENV'] = 'sync'
 
 from src.infrastructure.turso_adapter import get_turso_connection
 import sqlite3

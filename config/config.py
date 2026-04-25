@@ -36,9 +36,10 @@ ASSETS_DIR = os.path.join(BASE_PROJECT_DIR, "assets")
 SUPPORT_DIR = os.path.join(BASE_PROJECT_DIR, "Material de Soporte")
 
 # Logos del Sistema
-LOGO_PORTADA = os.path.join(ASSETS_DIR, "logo_portada.jpg")
-LOGO_APP = os.path.join(ASSETS_DIR, "logo_app.png")
-LOGO_CLIENTE = os.path.join(ASSETS_DIR, "logo_app.png") # Por defecto usa el de la app si no hay específico
+# ⚠️ ATENCIÓN: Los nombres de archivo deben coincidir EXACTAMENTE (Linux es case-sensitive)
+LOGO_PORTADA = os.path.join(ASSETS_DIR, "backgrounds", "logo_portada.jpg")
+LOGO_APP = os.path.join(ASSETS_DIR, "Logo_App.png")           # ← nombre real del archivo
+LOGO_CLIENTE = os.path.join(ASSETS_DIR, "Logo_App.png")       # fallback por defecto
 
 def obtener_logo_cliente(empresa_nombre):
     """Obtiene dinámicamente el logo de la carpeta assets según el nombre de la empresa activa"""

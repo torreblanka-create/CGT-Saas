@@ -65,47 +65,57 @@ def inyectar_estilos_cgt():
         st.warning("⚠️ No se encontró el archivo de estilos (assets/custom.css)")
 
 def inyectar_reloj_cgt():
-    """Componente flotante: Reloj en tiempo real + toggle modo oscuro."""
+    """Componente flotante: Reloj en tiempo real + toggle modo oscuro.
+    ⚠️ Envolvemos en try/catch para evitar errores CORS en Streamlit Cloud (iframes).
+    """
     components.html("""
     <script>
-        const doc = window.parent.document;
-        if (!doc.getElementById('cgt-theme-css')) {
-            const s = doc.createElement('style');
-            s.id = 'cgt-theme-css';
-            s.textContent = `
-                .stApp, .main, [data-testid="stAppViewContainer"], [data-testid="stAppViewBlockContainer"], [data-testid="stHeader"] { transition: background 0.3s ease, color 0.3s ease !important; }
-            `;
-            doc.head.appendChild(s);
+        try {
+            const doc = window.parent.document;
+            if (!doc.getElementById('cgt-theme-css')) {
+                const s = doc.createElement('style');
+                s.id = 'cgt-theme-css';
+                s.textContent = `
+                    .stApp, .main, [data-testid="stAppViewContainer"], [data-testid="stAppViewBlockContainer"], [data-testid="stHeader"] { transition: background 0.3s ease, color 0.3s ease !important; }
+                `;
+                doc.head.appendChild(s);
+            }
+            let r = doc.getElementById('reloj-cgt');
+            if (!r) {
+                r = doc.createElement('div');
+                r.id = 'reloj-cgt';
+                r.style.cssText = 'position:fixed; top:12px; right:20px; z-index:9999999; padding:6px 14px; border-radius:12px; display:flex; align-items:center; gap:10px; font-family:sans-serif; backdrop-filter:blur(10px); border:1px solid rgba(128,130,137,0.15); transition:all 0.3s ease;';
+                r.innerHTML = '<div style="display:flex; flex-direction:column;"><div id="h-cgt" style="font-weight:700; font-size:1rem;"></div><div id="f-cgt" style="font-size:0.7rem; opacity:0.8;"></div></div><button id="btn-theme-cgt" style="border:none; background:transparent; cursor:pointer; font-size:1.2rem;">🌙</button>';
+                doc.body.appendChild(r);
+            }
+            const btn = doc.getElementById('btn-theme-cgt');
+            const isDark = () => localStorage.getItem('cgt-theme') === 'dark';
+            const apply = (d) => {
+                doc.documentElement.classList.toggle('cgt-dark', d);
+                if (btn) btn.textContent = d ? "☀️" : "🌙";
+                if (r) {
+                    r.style.background = d ? 'rgba(30,41,59,0.95)' : 'rgba(255,255,255,0.92)';
+                    r.style.color = d ? '#E2F8F0' : '#1A1D21';
+                }
+            };
+            if (btn) {
+                btn.onclick = () => { 
+                    const n = !isDark(); 
+                    localStorage.setItem('cgt-theme', n ? 'dark' : 'light'); 
+                    apply(n);
+                };
+            }
+            apply(isDark());
+            setInterval(() => {
+                const n = new Date();
+                const h_el = doc.getElementById('h-cgt');
+                const f_el = doc.getElementById('f-cgt');
+                if (h_el) h_el.innerText = n.toLocaleTimeString('es-CL');
+                if (f_el) f_el.innerText = n.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'short'});
+            }, 1000);
+        } catch(e) {
+            console.warn('CGT Clock: No se pudo acceder al parent document (modo cloud/iframe)', e);
         }
-        let r = doc.getElementById('reloj-cgt');
-        if (!r) {
-            r = doc.createElement('div');
-            r.id = 'reloj-cgt';
-            r.style.cssText = 'position:fixed; top:12px; right:20px; z-index:9999999; padding:6px 14px; border-radius:12px; display:flex; align-items:center; gap:10px; font-family:sans-serif; backdrop-filter:blur(10px); border:1px solid rgba(128,130,137,0.15); transition:all 0.3s ease;';
-            r.innerHTML = '<div style="display:flex; flex-direction:column;"><div id="h-cgt" style="font-weight:700; font-size:1rem;"></div><div id="f-cgt" style="font-size:0.7rem; opacity:0.8;"></div></div><button id="btn-theme-cgt" style="border:none; background:transparent; cursor:pointer; font-size:1.2rem;">🌙</button>';
-            doc.body.appendChild(r);
-        }
-        const btn = doc.getElementById('btn-theme-cgt');
-        const isDark = () => localStorage.getItem('cgt-theme') === 'dark';
-        const apply = (d) => {
-            doc.documentElement.classList.toggle('cgt-dark', d);
-            btn.textContent = d ? "☀️" : "🌙";
-            r.style.background = d ? 'rgba(30,41,59,0.95)' : 'rgba(255,255,255,0.92)';
-            r.style.color = d ? '#E2E8F0' : '#1A1D21';
-        };
-        btn.onclick = () => { 
-            const n = !isDark(); 
-            localStorage.setItem('cgt-theme', n ? 'dark' : 'light'); 
-            apply(n);
-        };
-        apply(isDark());
-        setInterval(() => {
-            const n = new Date();
-            const h_el = doc.getElementById('h-cgt');
-            const f_el = doc.getElementById('f-cgt');
-            if (h_el) h_el.innerText = n.toLocaleTimeString('es-CL');
-            if (f_el) f_el.innerText = n.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'short'});
-        }, 1000);
     </script>
     """, height=0)
 
@@ -436,21 +446,35 @@ def run_cgt_app():
         bg_dir = os.path.join(os.path.dirname(__file__), "assets", "backgrounds")
         bg_files = [f for f in os.listdir(bg_dir) if f.endswith(('.png', '.jpg', '.jpeg'))] if os.path.exists(bg_dir) else []
         
+        b64_bg = None
         if bg_files:
             bg_path = os.path.join(bg_dir, random.choice(bg_files))
             b64_bg = get_base64_img(bg_path)
-        else:
+        if not b64_bg:
             b64_bg = get_base64_img(LOGO_PORTADA) # Fallback
 
         b64_logo = get_base64_img(LOGO_APP)
         
+        # ── 2. Construir CSS del fondo (con fallback seguro) ──
+        bg_css = ""
+        if b64_bg:
+            bg_css = f"""
+                [data-testid="stAppViewContainer"] {{
+                    background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), url("data:image/png;base64,{b64_bg}") center/cover no-repeat !important;
+                    background-attachment: fixed !important;
+                }}
+            """
+        else:
+            bg_css = """
+                [data-testid="stAppViewContainer"] {
+                    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+                }
+            """
+        
         # Inyectar estilos específicos para login
         st.markdown(f"""
             <style>
-            [data-testid="stAppViewContainer"] {{
-                background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), url("data:image/png;base64,{b64_bg}") center/cover no-repeat !important;
-                background-attachment: fixed !important;
-            }}
+            {bg_css}
             header, [data-testid="stSidebar"], [data-testid="stHeader"] {{ visibility: hidden !important; }}
             
             /* Animación de entrada para el login */
@@ -467,10 +491,16 @@ def run_cgt_app():
         _, c, _ = st.columns([1, 1.5, 1]) # Columnas ajustadas para el nuevo ancho del form
         with c:
             with st.form("login_premium", border=False):
-                # Header personalizado
+                # Header personalizado (con fallback para logo)
+                logo_html = ""
+                if b64_logo:
+                    logo_html = f'<img src="data:image/png;base64,{b64_logo}" class="login-logo">'
+                else:
+                    logo_html = '<div class="login-logo-fallback">🛡️</div>'
+                
                 st.markdown(f"""
                     <div class="login-header">
-                        <img src="data:image/png;base64,{b64_logo}" class="login-logo">
+                        {logo_html}
                         <h1 class="login-title">CGT Pro</h1>
                         <p class="login-subtitle">Sistema de Control de Gestión Total - Elite SaaS</p>
                     </div>

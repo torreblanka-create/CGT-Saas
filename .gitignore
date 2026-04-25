@@ -56,7 +56,7 @@ Material para revisión/
 CVisual actualizaciones/
 Documentacion_Soporte/
 assets/logos_clientes/
-assets/backgrounds/
+# assets/backgrounds/ — Comentado: contiene logo_portada.jpg y fondos necesarios para login
 
 # ── Scripts de ejecución local (Windows) ────────────────────────────
 *.bat
