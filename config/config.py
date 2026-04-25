@@ -22,8 +22,16 @@ TURSO_ENV = os.getenv("TURSO_ENV", "local")
 # Esto asegura que el sistema encuentre las carpetas sin importar desde dónde lo ejecutes.
 BASE_PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
+# Detectar si estamos en Streamlit Cloud (permisos limitados)
+IS_STREAMLIT_CLOUD = os.path.exists('/mount/src')
+
 # Directorio Principal de Datos
-BASE_DATA_DIR = os.path.join(BASE_PROJECT_DIR, "CGT_DATA")
+if IS_STREAMLIT_CLOUD:
+    # En Streamlit Cloud, usar /tmp/ (siempre disponible)
+    BASE_DATA_DIR = os.path.join('/tmp', "CGT_DATA")
+else:
+    # En local, usar CGT_DATA en el proyecto
+    BASE_DATA_DIR = os.path.join(BASE_PROJECT_DIR, "CGT_DATA")
 
 # Bases de Datos y Excel
 DB_PATH_GLOBAL = os.path.join(BASE_DATA_DIR, "cgt_control.db") # Catálogo Maestro (Usuarios Globales)

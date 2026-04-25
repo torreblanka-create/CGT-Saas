@@ -156,6 +156,11 @@ def turso_push(local_db_path: str):
     conn.row_factory = sqlite3.Row
 
     try:
+        # Desactivar FK para evitar conflictos
+        _turso_execute(http_url, token, [
+            {"type": "execute", "stmt": {"sql": "PRAGMA foreign_keys = OFF"}}
+        ])
+
         cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")
         tables = [r[0] for r in cursor.fetchall()]
 
@@ -217,6 +222,13 @@ def turso_push(local_db_path: str):
     except Exception as e:
         logger.warning(f"Turso push falló: {e}")
     finally:
+        try:
+            # Reactivar FKs al finalizar
+            _turso_execute(http_url, token, [
+                {"type": "execute", "stmt": {"sql": "PRAGMA foreign_keys = ON"}}
+            ])
+        except Exception:
+            pass
         conn.close()
 
 
