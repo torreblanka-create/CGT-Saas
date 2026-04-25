@@ -514,7 +514,7 @@ def cargar_usuarios(db_path):
                     # Si el email ya está usado por otro, usar uno único
                     cursor.execute("SELECT username FROM usuarios WHERE email = ?", (email,))
                     if cursor.fetchone():
-                        email = f"{username}_{int(time.time())}@cgt.pro" if False else f"{username}@cgt.local"
+                        email = f"{username}@cgt.local"
                     cursor.execute("""
                         INSERT INTO usuarios (username, pw, rol, nombre, empresa_id, contrato_asignado_id, email, cargo, departamento, terminos_aceptados)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
