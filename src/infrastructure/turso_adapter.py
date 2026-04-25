@@ -71,6 +71,10 @@ def _turso_execute(http_url: str, token: str, statements: list) -> list:
 
 
 def turso_pull(local_db_path: str):
+    """DESHABILITADO - Usar solo SQLite local"""
+    return
+
+def _turso_pull_disabled(local_db_path: str):
     """
     Descarga todas las tablas de Turso Cloud → SQLite local.
     Sobreescribe solo tablas que existen en Turso.
@@ -146,6 +150,10 @@ def turso_pull(local_db_path: str):
 
 
 def turso_push(local_db_path: str):
+    """DESHABILITADO - Usar solo SQLite local"""
+    return
+
+def _turso_push_disabled(local_db_path: str):
     """
     Sube todas las tablas de SQLite local → Turso Cloud.
     Solo activo si TURSO_ENV=sync Y hay credenciales.
@@ -305,25 +313,12 @@ class TursoConnection:
 def get_turso_connection(db_path, turso_url=None, turso_token=None):
     """
     Context manager para conexión Turso/SQLite.
-    Hace pull de Turso al entrar (solo en modo sync).
-    Push ocurre en cada commit().
+    NOTA: Turso desactivado - usar solo SQLite local.
     """
     env = os.getenv("TURSO_ENV", "local")
-    try:
-        import streamlit as st
-        env = env or st.secrets.get("TURSO_ENV", "local")
-    except Exception:
-        pass
 
-    # Pull al inicio de la sesión (trae datos frescos de Turso)
-    # SOLO si está en sync mode Y tiene credenciales
-    if env == "sync":
-        url, token = _get_turso_credentials()
-        if url and token:
-            try:
-                turso_pull(db_path)
-            except Exception as e:
-                logger.warning(f"Pull inicial fallido (continuando en local): {e}")
+    # Siempre usar "local" por ahora
+    env = "local"
 
     conn = TursoConnection(db_path, env)
     try:
